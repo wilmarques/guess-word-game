@@ -10,11 +10,9 @@ tasks:
 ports:
   - port: 5900
     onOpen: ignore
-    visibility: private
     name: VNC Server
   - port: 6080
     onOpen: ignore
-    visibility: private
     name: VNC Client
     description: noVNC web client
   - port: 8080
@@ -27,7 +25,6 @@ ports:
   - port: 40000-50000
     onOpen: ignore
     name: Flutter Internals
-    visibility: public
   - port: 5037
     onOpen: ignore
     name: ADB
