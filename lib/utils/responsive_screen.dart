@@ -23,10 +23,13 @@ class ResponsiveScreen extends StatelessWidget {
   /// elements.
   final double mainAreaProminence;
 
+  final CrossAxisAlignment topMessageAreaCrossAxisAlignment;
+
   const ResponsiveScreen({
     required this.squarishMainArea,
     required this.rectangularMenuArea,
     this.topMessageArea = const SizedBox.shrink(),
+    this.topMessageAreaCrossAxisAlignment = CrossAxisAlignment.stretch,
     this.mainAreaProminence = 0.8,
     super.key,
   });
@@ -42,7 +45,7 @@ class ResponsiveScreen extends StatelessWidget {
         if (size.height >= size.width) {
           // "Portrait" / "mobile" mode.
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: topMessageAreaCrossAxisAlignment,
             children: [
               SafeArea(
                 bottom: false,

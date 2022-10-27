@@ -15,23 +15,24 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResponsiveScreen(
-        squarishMainArea: Row(
-          children: [
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Settings'),
+        topMessageAreaCrossAxisAlignment: CrossAxisAlignment.end,
+        topMessageArea: SizedBox(
+          // width: 10,
+          // constraints: const BoxConstraints(maxWidth: 30),
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text('Settings'),
+          ),
+        ),
+        squarishMainArea: const Center(
+          child: Text(
+            'Guess the Word',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 55,
+              height: 1,
             ),
-            const Center(
-              child: Text(
-                'Guess the Word',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 55,
-                  height: 1,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
         rectangularMenuArea: Column(
           mainAxisAlignment: MainAxisAlignment.end,
