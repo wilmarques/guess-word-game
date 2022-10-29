@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:guess_word_game/widgets/default_button.dart';
 
-import '../utils/responsive_screen.dart';
+import '../utils/portrait_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,15 +15,17 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResponsiveScreen(
-        topMessageAreaCrossAxisAlignment: CrossAxisAlignment.end,
-        topMessageArea: SizedBox(
-          // width: 10,
-          // constraints: const BoxConstraints(maxWidth: 30),
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Settings'),
-          ),
+      body: PortraitScreen(
+        topMessageArea: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            SizedBox(
+              child: DefaultButton(
+                text: 'Settings',
+                onPressed: () {},
+              ),
+            ),
+          ],
         ),
         squarishMainArea: const Center(
           child: Text(
@@ -37,16 +40,16 @@ class _MainScreenState extends State<MainScreen> {
         rectangularMenuArea: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            ElevatedButton(
+            DefaultButton(
               onPressed: () {
                 GoRouter.of(context).go('/play');
               },
-              child: const Text('Play'),
+              text: 'Play',
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
+            DefaultButton(
               onPressed: () {},
-              child: const Text('Disable sound'),
+              text: 'Disable sound',
             ),
           ],
         ),
