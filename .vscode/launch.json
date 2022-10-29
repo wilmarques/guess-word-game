@@ -6,7 +6,11 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
-      "toolArgs": ["--web-port", "8080"]
+      "toolArgs": [
+        "--web-port", "8080",
+        "--web-browser-flag", "--auto-open-devtools-for-tabs",
+        "--web-browser-flag", "--start-maximized"
+      ]
     },
     {
       "name": "Flutter Release",
@@ -14,14 +18,22 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "release",
-      "toolArgs": ["--web-port", "8080"]
+      "toolArgs": [
+        "--web-port", "8080",
+        "--web-browser-flag", "--auto-open-devtools-for-tabs",
+        "--web-browser-flag", "--start-maximized"
+      ]
     },
     {
       "name": "Flutter Profile",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
-      "toolArgs": ["--web-port", "8080"]
+      "toolArgs": [
+        "--web-port", "8080",
+        "--web-browser-flag", "--auto-open-devtools-for-tabs",
+        "--web-browser-flag", "--start-maximized"
+      ]
     }
   ]
 }
