@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:guess_word_game/widgets/default_button.dart';
 
 import '../utils/portrait_screen.dart';
+import '../widgets/default_button.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

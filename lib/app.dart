@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:guess_word_game/screens/game_screen.dart';
 
 import 'screens/main_screen.dart';
 
@@ -20,12 +21,10 @@ class GuessWordApp extends StatelessWidget {
         path: '/',
         builder: (context, state) => const MainScreen(),
       ),
-      // GoRoute(
-      //   path: '/b',
-      //   builder: (BuildContext context, GoRouterState state) {
-      //     return ScreenB();
-      //   },
-      // ),
+      GoRoute(
+        path: '/play',
+        builder: (context, state) => const GameScreen(),
+      ),
     ],
   );
 }
