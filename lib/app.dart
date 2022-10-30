@@ -12,6 +12,7 @@ class GuessWordApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: _router,
       title: 'Guess the Word',
+      debugShowCheckedModeBanner: false,
     );
   }
 
