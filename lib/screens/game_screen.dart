@@ -31,8 +31,60 @@ class _GameScreenState extends State<GameScreen> {
           ],
         ),
         squarishMainArea: Column(
-          children: const [
-            Text('Deffinition and current word'),
+          children: [
+            CustomScrollView(
+              slivers: [
+                SliverFixedExtentList(
+                  itemExtent: 50.0,
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Container(
+                        alignment: Alignment.center,
+                        color: Colors.lightBlue[100 * (index % 9)],
+                        child: Text('list item $index'),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                    ),
+                  ),
+                  child: const Text('L'),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                    ),
+                  ),
+                  child: const Text('O'),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                    ),
+                  ),
+                  child: const Text('V'),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                    ),
+                  ),
+                  child: const Text('E'),
+                )
+              ],
+            ),
           ],
         ),
         rectangularMenuArea: Column(
