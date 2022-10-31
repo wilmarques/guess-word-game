@@ -31,22 +31,32 @@ class _GameScreenState extends State<GameScreen> {
           ],
         ),
         squarishMainArea: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            CustomScrollView(
-              slivers: [
-                SliverFixedExtentList(
-                  itemExtent: 50.0,
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return Container(
-                        alignment: Alignment.center,
-                        color: Colors.lightBlue[100 * (index % 9)],
-                        child: Text('list item $index'),
-                      );
-                    },
+            ConstrainedBox(
+              constraints: const BoxConstraints.expand(
+                width: 400,
+                height: 100,
+              ),
+              child: CustomScrollView(
+                scrollDirection: Axis.horizontal,
+                slivers: [
+                  SliverFixedExtentList(
+                    itemExtent: 400,
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return Container(
+                          height: 20,
+                          alignment: Alignment.center,
+                          color: Colors.lightBlue[100 * (index % 9)],
+                          child: Text('list item ${index + 1}'),
+                        );
+                      },
+                      // childCount: 3,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
