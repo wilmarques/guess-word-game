@@ -33,30 +33,22 @@ class _GameScreenState extends State<GameScreen> {
         squarishMainArea: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints.expand(
-                width: 400,
-                height: 100,
-              ),
-              child: CustomScrollView(
-                scrollDirection: Axis.horizontal,
-                slivers: [
-                  SliverFixedExtentList(
-                    itemExtent: 400,
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        return Container(
-                          height: 20,
-                          alignment: Alignment.center,
-                          color: Colors.lightBlue[100 * (index % 9)],
-                          child: Text('list item ${index + 1}'),
-                        );
-                      },
-                      // childCount: 3,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                DefaultButton(text: 'Previous tip', onPressed: () {}),
+                // TODO: Tip viewer
+                Container(
+                  width: 250,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
                     ),
                   ),
-                ],
-              ),
+                  child: const Text('Is all we need'),
+                ),
+                DefaultButton(text: 'Next tip', onPressed: () {}),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
