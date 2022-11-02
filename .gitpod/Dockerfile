@@ -5,10 +5,9 @@ SHELL ["/bin/bash", "-c"]
 ########################## LINUX ###########################
 ############################################################
 
-# Disabled for now, not in use currently
-
-# USER root
-# RUN apt install cmake
+USER root
+RUN apt-get update \
+  && apt-get install -y cmake
 
 ############################################################
 ######################### ANDROID ##########################
