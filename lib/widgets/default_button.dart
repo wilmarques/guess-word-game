@@ -7,7 +7,7 @@ class DefaultButton extends StatelessWidget {
   final String text;
 
   /// Function to be triggered when [DefaultButton] is pressed.
-  final Function() onPressed;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
