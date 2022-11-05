@@ -2,7 +2,6 @@ image:
   file: .gitpod/Dockerfile
 
 tasks:
-  - before: sudo mount -t tmpfs shm -osize=4096m /dev/shm
   - name: Flutter env prep
     before: |
       flutter pub get
