@@ -45,25 +45,45 @@ class _TipViewerState extends State<TipViewer> {
     final currentTip = tips[currentTipIndex];
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        DefaultButton(
-          text: 'Previous tip',
-          onPressed: hasPreviousTip() ? showPreviousTip : null,
-        ),
-        Container(
-          width: 250,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1,
-              color: Colors.red,
+        SizedBox(
+          width: 90,
+          height: 35,
+          child: ElevatedButton(
+            onPressed: hasPreviousTip() ? showPreviousTip : null,
+            child: const Text(
+              'Previous\ntip',
+              textAlign: TextAlign.center,
             ),
           ),
-          child: Text(currentTip),
         ),
-        DefaultButton(
-          text: 'Next tip',
-          onPressed: hasNextTip() ? showNextTip : null,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 1,
+                  color: Colors.red,
+                ),
+              ),
+              child: Text(
+                currentTip,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 90,
+          height: 35,
+          child: ElevatedButton(
+            onPressed: hasNextTip() ? showNextTip : null,
+            child: const Text(
+              'Next\ntip',
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
       ],
     );

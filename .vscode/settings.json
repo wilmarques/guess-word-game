@@ -9,5 +9,7 @@
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
-  }
+  },
+  "dart.flutterHotReloadOnSave": "all",
+  "dart.flutterShowWebServerDevice": "always"
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:guess_word_game/widgets/tip_viewer.dart';
 
 import '../utils/portrait_screen.dart';
 import '../widgets/default_button.dart';
+import '../widgets/tip_viewer.dart';
+import '../widgets/word_viewer.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -19,11 +20,13 @@ class _GameScreenState extends State<GameScreen> {
     'A strong feeling of affection and concern for another person accompanied by sexual attraction.',
     'A feeling of devotion or adoration toward God or a god.',
   ];
+  final word = 'love';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PortraitScreen(
+        // TODO: Extract this to another widget
         topMessageArea: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -42,52 +45,23 @@ class _GameScreenState extends State<GameScreen> {
         squarishMainArea: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TipViewer(tips: tips),
-            Row(
-              // TODO: create a word viewer widget
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                    ),
-                  ),
-                  child: const Text('L'),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                    ),
-                  ),
-                  child: const Text('O'),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                    ),
-                  ),
-                  child: const Text('V'),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                    ),
-                  ),
-                  child: const Text('E'),
-                )
-              ],
+            SizedBox(
+              height: 300,
+              child: TipViewer(tips: tips),
+            ),
+            // TODO: Centralize the word viewer
+            Expanded(
+              child: WordViewer(word: word),
+            ),
+            const SizedBox(
+              height: 100,
+              // TODO: Next task !!!!
+              // TODO: extract keyboard to another Widget
+              child: Text('Keyboard!!'),
             ),
           ],
         ),
-        rectangularMenuArea: Column(
-          children: const [
-            Text('Keyboard and Show new tip button'),
-          ],
-        ),
+        rectangularMenuArea: const Text('Menu area'),
       ),
     );
   }
