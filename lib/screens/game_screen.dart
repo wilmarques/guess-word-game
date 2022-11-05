@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:guess_word_game/utils/portrait_screen.dart';
-import 'package:guess_word_game/widgets/default_button.dart';
 import 'package:guess_word_game/widgets/tip_viewer.dart';
+
+import '../utils/portrait_screen.dart';
+import '../widgets/default_button.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -18,22 +19,6 @@ class _GameScreenState extends State<GameScreen> {
     'A strong feeling of affection and concern for another person accompanied by sexual attraction.',
     'A feeling of devotion or adoration toward God or a god.',
   ];
-  var currentTipIndex = 0;
-
-  bool hasNextTip() {
-    final tipsListLength = tips.length - 1;
-    if (currentTipIndex < tipsListLength) {
-      return true;
-    }
-    return false;
-  }
-
-  bool hasPreviousTip() {
-    if (currentTipIndex > 0) {
-      return true;
-    }
-    return false;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,36 +42,7 @@ class _GameScreenState extends State<GameScreen> {
         squarishMainArea: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              // TODO: move buttons and its state to TipViewer widget
-              children: [
-                DefaultButton(
-                  text: 'Previous tip',
-                  onPressed: hasPreviousTip()
-                      ? () {
-                          setState(() {
-                            currentTipIndex--;
-                          });
-                        }
-                      : null,
-                ),
-                TipViewer(
-                  tips: tips,
-                  currentTipIndex: currentTipIndex,
-                ),
-                DefaultButton(
-                  text: 'Next tip',
-                  onPressed: hasNextTip()
-                      ? () {
-                          setState(() {
-                            currentTipIndex++;
-                          });
-                        }
-                      : null,
-                ),
-              ],
-            ),
+            TipViewer(tips: tips),
             Row(
               // TODO: create a word viewer widget
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
