@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../utils/portrait_screen.dart';
+
 import '../widgets/default_button.dart';
+import '../widgets/keyboard.dart';
 import '../widgets/tip_viewer.dart';
 import '../widgets/word_viewer.dart';
 
@@ -54,10 +56,8 @@ class _GameScreenState extends State<GameScreen> {
               child: WordViewer(word: word),
             ),
             const SizedBox(
-              height: 100,
-              // TODO: Next task !!!!
-              // TODO: extract keyboard to another Widget
-              child: Text('Keyboard!!'),
+              height: 400,
+              child: Keyboard(),
             ),
           ],
         ),
