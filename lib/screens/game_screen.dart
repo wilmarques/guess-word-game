@@ -55,8 +55,7 @@ class _GameScreenState extends State<GameScreen> {
             Expanded(
               child: WordViewer(word: word),
             ),
-            const SizedBox(
-              height: 400,
+            const Expanded(
               child: Keyboard(),
             ),
           ],

@@ -4,43 +4,43 @@ import '../utils/letters.dart';
 
 import 'keyboard_letter.dart';
 
+// TODO: Last letters aren't visible. They are out of visible space, cutted out
+
 class Keyboard extends StatelessWidget {
   const Keyboard({
     Key? key,
   }) : super(key: key);
 
+  final double rowSpacing = 0;
+  final double columnSpacing = 0;
+  final columns = 6;
+  final gaps = 5; // Number of gaps between the columns
+  final errorMargin = 0.01;
+
   @override
   Widget build(BuildContext context) {
-    const imaginarypadding = 8;
-    const double runSpacing = 2;
-    const double spacing = 2;
-    const columns = 6;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final totalAvailableWidth = constraints.biggest.width;
+        final itemWidth =
+            ((totalAvailableWidth - (columnSpacing * gaps)) / columns) -
+                errorMargin;
 
-    // TODO: understand why items placing 5 items in the row, instead of 6
-
-    final itemWidth =
-        (MediaQuery.of(context).size.width - (spacing) * (columns + 1)) /
-            columns;
-
-    return Center(
-      child: Wrap(
-        runSpacing: runSpacing,
-        spacing: spacing,
-        alignment: WrapAlignment.center,
-        children: letters
-            .map(
-              // TODO: Remove this Container after understanding the layout issue
-              (letter) => Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: SizedBox(
+        return Wrap(
+          runSpacing: rowSpacing,
+          spacing: columnSpacing,
+          alignment: WrapAlignment.center,
+          children: letters
+              .map(
+                (letter) => SizedBox(
                   width: itemWidth,
                   height: itemWidth,
                   child: KeyboardLetter(letter: letter),
                 ),
-              ),
-            )
-            .toList(),
-      ),
+              )
+              .toList(),
+        );
+      },
     );
   }
 }
