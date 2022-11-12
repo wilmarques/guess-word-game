@@ -60,7 +60,7 @@ class _GameScreenState extends State<GameScreen> {
             ),
           ],
         ),
-        rectangularMenuArea: const Text('Menu area'),
+        rectangularMenuArea: const Keyboard(),
       ),
     );
   }

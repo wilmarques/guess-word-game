@@ -11,7 +11,17 @@ class KeyboardLetter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(letter),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(letter),
+        ),
+      ),
     );
   }
 }
