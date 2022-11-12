@@ -45,18 +45,18 @@ class _GameScreenState extends State<GameScreen> {
           ],
         ),
         squarishMainArea: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-              height: 300,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 50,
+              ),
+              // TODO: Make TipViewer use a maximum height
+              // Now it's expanding according to its content
+              // Moving the WordViewer down
               child: TipViewer(tips: tips),
             ),
-            // TODO: Centralize the word viewer
             Expanded(
               child: WordViewer(word: word),
-            ),
-            const Expanded(
-              child: Keyboard(),
             ),
           ],
         ),
