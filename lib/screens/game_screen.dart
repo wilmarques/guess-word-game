@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:guess_word_game/services/word_loader_service.dart';
 
 import '../utils/portrait_screen.dart';
 
@@ -16,16 +17,12 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final tips = const [
-    'Is all we need',
-    'A strong feeling of affection and concern toward another person, as that arising from kinship or close friendship.',
-    'A strong feeling of affection and concern for another person accompanied by sexual attraction.',
-    'A feeling of devotion or adoration toward God or a god.',
-  ];
-  final word = 'love';
+  final wordLoaderService = WordLoaderService();
 
   @override
   Widget build(BuildContext context) {
+    final currentWord = wordLoaderService.currentWord();
+
     return Scaffold(
       body: PortraitScreen(
         // TODO: Extract this to another widget
@@ -50,10 +47,10 @@ class _GameScreenState extends State<GameScreen> {
               padding: const EdgeInsets.symmetric(
                 vertical: 50,
               ),
-              child: TipViewer(tips: tips),
+              child: TipViewer(tips: currentWord.definitions),
             ),
             Expanded(
-              child: WordViewer(word: word),
+              child: WordViewer(word: currentWord.word),
             ),
           ],
         ),
