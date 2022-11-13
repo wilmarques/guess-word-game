@@ -50,9 +50,6 @@ class _GameScreenState extends State<GameScreen> {
               padding: const EdgeInsets.symmetric(
                 vertical: 50,
               ),
-              // TODO: Make TipViewer use a maximum height
-              // Now it's expanding according to its content
-              // Moving the WordViewer down
               child: TipViewer(tips: tips),
             ),
             Expanded(

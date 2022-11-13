@@ -59,17 +59,14 @@ class _TipViewerState extends State<TipViewer> {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 1,
-                  color: Colors.red,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: SizedBox(
+              height: 80,
+              child: Center(
+                child: Text(
+                  currentTip,
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              child: Text(
-                currentTip,
-                textAlign: TextAlign.center,
               ),
             ),
           ),
