@@ -4,8 +4,6 @@ import '../utils/letters.dart';
 
 import 'keyboard_letter.dart';
 
-// TODO: Last letters aren't visible. They are out of visible space, cutted out
-
 class Keyboard extends StatelessWidget {
   const Keyboard({
     Key? key,
@@ -35,7 +33,11 @@ class Keyboard extends StatelessWidget {
                 (letter) => SizedBox(
                   width: itemWidth,
                   height: itemWidth,
-                  child: KeyboardLetter(letter: letter),
+                  child: KeyboardLetter(
+                    letter: letter,
+                    // TODO: show used letters on each guessing
+                    letterWasUsed: true,
+                  ),
                 ),
               )
               .toList(),
