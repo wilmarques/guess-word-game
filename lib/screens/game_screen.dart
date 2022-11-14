@@ -17,11 +17,17 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final wordLoaderService = WordLoaderService();
+  final _wordLoaderService = WordLoaderService();
+
+  @override
+  void initState() {
+    super.initState();
+    _wordLoaderService.preloadNextWord();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final currentWord = wordLoaderService.currentWord();
+    final currentWord = _wordLoaderService.currentWord();
 
     return Scaffold(
       body: PortraitScreen(
