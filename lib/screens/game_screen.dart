@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:guess_word_game/services/word_loader_service.dart';
 
 import '../utils/portrait_screen.dart';
 
+import '../services/word_loader_service.dart';
+
 import '../widgets/default_button.dart';
-import '../widgets/keyboard.dart';
+import '../widgets/keyboard/keyboard.dart';
+import '../widgets/keyboard/keyboard_letter_pressed_notification.dart';
 import '../widgets/tip_viewer.dart';
 import '../widgets/word_viewer.dart';
 
@@ -18,6 +20,7 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final _wordLoaderService = WordLoaderService();
+  List<String> pressedLetters = [];
 
   @override
   void initState() {
@@ -60,7 +63,21 @@ class _GameScreenState extends State<GameScreen> {
             ),
           ],
         ),
-        rectangularMenuArea: const Keyboard(),
+        rectangularMenuArea:
+            NotificationListener<KeyboardLetterPressedNotification>(
+          onNotification: (pressedLetterNotification) {
+            final pressedLetter = pressedLetterNotification.pressedLetter;
+            if (!pressedLetters.contains(pressedLetter)) {
+              setState(() {
+                pressedLetters.add(pressedLetter);
+              });
+            }
+            return true;
+          },
+          child: Keyboard(
+            pressedLetters: pressedLetters,
+          ),
+        ),
       ),
     );
   }
