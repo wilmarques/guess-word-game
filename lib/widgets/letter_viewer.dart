@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 class LetterViewer extends StatelessWidget {
-  const LetterViewer({super.key, required this.letter});
+  const LetterViewer({
+    super.key,
+    required this.letter,
+    required this.show,
+  });
 
   final String letter;
+
+  /// Indicating whether the letter can be shown or not
+  final bool show;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,7 @@ class LetterViewer extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Text(letter),
+        child: Text(show ? letter : ''),
       ),
     );
   }

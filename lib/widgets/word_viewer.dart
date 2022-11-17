@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 import '../widgets/letter_viewer.dart';
 
 class WordViewer extends StatelessWidget {
-  const WordViewer({super.key, required this.word});
+  const WordViewer({
+    super.key,
+    required this.word,
+    required this.guessedLetters,
+  });
 
   final String word;
+  /// Which letters were already tried
+  final List<String> guessedLetters;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +20,12 @@ class WordViewer extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: letters.map((letter) => LetterViewer(letter: letter)).toList(),
+      children: letters
+          .map((letter) => LetterViewer(
+                letter: letter,
+                show: guessedLetters.contains(letter),
+              ))
+          .toList(),
     );
   }
 }

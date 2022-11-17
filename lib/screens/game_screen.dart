@@ -19,7 +19,7 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final _wordLoaderService = WordLoaderService();
-  List<String> pressedLetters = [];
+  List<String> guessedLetters = [];
 
   @override
   void initState() {
@@ -43,7 +43,10 @@ class _GameScreenState extends State<GameScreen> {
               child: TipViewer(tips: currentWord.definitions),
             ),
             Expanded(
-              child: WordViewer(word: currentWord.word),
+              child: WordViewer(
+                word: currentWord.word,
+                guessedLetters: guessedLetters,
+              ),
             ),
           ],
         ),
@@ -51,15 +54,15 @@ class _GameScreenState extends State<GameScreen> {
             NotificationListener<KeyboardLetterPressedNotification>(
           onNotification: (pressedLetterNotification) {
             final pressedLetter = pressedLetterNotification.pressedLetter;
-            if (!pressedLetters.contains(pressedLetter)) {
+            if (!guessedLetters.contains(pressedLetter)) {
               setState(() {
-                pressedLetters.add(pressedLetter);
+                guessedLetters.add(pressedLetter);
               });
             }
             return true;
           },
           child: Keyboard(
-            pressedLetters: pressedLetters,
+            pressedLetters: guessedLetters,
           ),
         ),
       ),
