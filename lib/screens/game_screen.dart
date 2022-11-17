@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../utils/portrait_screen.dart';
 
 import '../services/word_loader_service.dart';
 
-import '../widgets/default_button.dart';
+import '../widgets/game_screen_top_bar.dart';
 import '../widgets/keyboard/keyboard.dart';
 import '../widgets/keyboard/keyboard_letter_pressed_notification.dart';
 import '../widgets/tip_viewer.dart';
@@ -34,22 +33,7 @@ class _GameScreenState extends State<GameScreen> {
 
     return Scaffold(
       body: PortraitScreen(
-        // TODO: Extract this to another widget
-        topMessageArea: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('456'),
-            Center(
-              child: DefaultButton(
-                text: 'Stop',
-                onPressed: () {
-                  GoRouter.of(context).go('/');
-                },
-              ),
-            ),
-            const Text('123'),
-          ],
-        ),
+        topMessageArea: const GameScreenTopBar(),
         squarishMainArea: Column(
           children: [
             Padding(
