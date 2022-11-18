@@ -10,13 +10,14 @@ class WordViewer extends StatelessWidget {
   });
 
   final String word;
+
   /// Which letters were already tried
-  final List<String> guessedLetters;
+  final Iterable<String> guessedLetters;
 
   @override
   Widget build(BuildContext context) {
     final letters =
-        word.split('').map((letter) => letter.toUpperCase()).toList();
+        word.split('').map((letter) => letter.toUpperCase());
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

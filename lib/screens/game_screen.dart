@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../utils/portrait_screen.dart';
 
@@ -10,6 +11,8 @@ import '../widgets/keyboard/keyboard_letter_pressed_notification.dart';
 import '../widgets/tip_viewer.dart';
 import '../widgets/word_viewer.dart';
 
+/// TODO: Develop "winning" mechanic
+
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
 
@@ -20,6 +23,15 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   final _wordLoaderService = WordLoaderService();
   List<String> guessedLetters = [];
+
+  // TODO: Extract this logic to a new service
+  bool isAllLettersGuessedRight() {
+    final currentWord = _wordLoaderService.currentWord();
+    final currentWordLetters = currentWord.letters;
+    return currentWordLetters.every((letter) {
+      return guessedLetters.contains(letter);
+    });
+  }
 
   @override
   void initState() {
@@ -58,6 +70,10 @@ class _GameScreenState extends State<GameScreen> {
               setState(() {
                 guessedLetters.add(pressedLetter);
               });
+
+              if (isAllLettersGuessedRight()) {
+                GoRouter.of(context).go('/winning');
+              }
             }
             return true;
           },

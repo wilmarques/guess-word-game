@@ -4,14 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../utils/portrait_screen.dart';
 import '../widgets/default_button.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
