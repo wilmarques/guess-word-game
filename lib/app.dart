@@ -29,7 +29,7 @@ class GuessWordApp extends StatelessWidget {
       ),
       GoRoute(
         path: '/winning',
-        builder: (context, state) => const WinningScreen(),
+        builder: (context, state) => WinningScreen(),
       ),
     ],
   );

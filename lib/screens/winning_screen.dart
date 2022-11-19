@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../services/word_loader_service.dart';
 import '../widgets/default_button.dart';
 
-class WinningScreen extends StatelessWidget {
+class WinningScreen extends StatefulWidget {
   const WinningScreen({super.key});
+
+  @override
+  State<WinningScreen> createState() => _WinningScreenState();
+}
+
+class _WinningScreenState extends State<WinningScreen> {
+  final _wordLoaderService = WordLoaderService();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,7 @@ class WinningScreen extends StatelessWidget {
           ),
           DefaultButton(
             onPressed: () {
-              // TODO: load next word, before going to play screen
+              _wordLoaderService.loadNextWord();
               GoRouter.of(context).go('/play');
             },
             text: 'Next word',

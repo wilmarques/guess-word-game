@@ -1,6 +1,6 @@
 import 'package:guess_word_game/models/word.dart';
 
-// TODO: Remove all stale data and consume some API service
+// TODO (live): Remove all stale data and consume some API service
 
 class WordLoaderService {
   final List<Word> _loadedWords = [
@@ -27,7 +27,13 @@ class WordLoaderService {
 
   Word currentWord() => _loadedWords.elementAt(_currentWordIndex);
 
-  void loadNextWord() => _currentWordIndex++;
+  void loadNextWord() {
+    if (_currentWordIndex >= (_loadedWords.length-1)) {
+      _currentWordIndex = 0;
+    } else {
+      _currentWordIndex++;
+    }
+  }
 
   void preloadNextWord() {
     // throw 'Not implemented yet';

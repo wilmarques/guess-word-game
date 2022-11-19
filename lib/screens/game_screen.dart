@@ -11,8 +11,6 @@ import '../widgets/keyboard/keyboard_letter_pressed_notification.dart';
 import '../widgets/tip_viewer.dart';
 import '../widgets/word_viewer.dart';
 
-/// TODO: Develop "winning" mechanic
-
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
 
@@ -21,10 +19,12 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  // TODO (live): Change the creation of this service to use Dependency Injection
+  // Ref: https://docs.flutter.dev/development/data-and-backend/state-mgmt/options
   final _wordLoaderService = WordLoaderService();
   List<String> guessedLetters = [];
 
-  // TODO: Extract this logic to a new service
+  // TODO (live): Extract this logic to a new service
   bool isAllLettersGuessedRight() {
     final currentWord = _wordLoaderService.currentWord();
     final currentWordLetters = currentWord.letters;
