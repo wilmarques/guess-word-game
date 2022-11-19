@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../models/word.dart';
 import '../utils/portrait_screen.dart';
 
 import '../services/word_loader_service.dart';
@@ -19,14 +20,10 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  // TODO (live): Change the creation of this service to use Dependency Injection
-  // Ref: https://docs.flutter.dev/development/data-and-backend/state-mgmt/options
-  final _wordLoaderService = WordLoaderService();
   List<String> guessedLetters = [];
 
   // TODO (live): Extract this logic to a new service
-  bool isAllLettersGuessedRight() {
-    final currentWord = _wordLoaderService.currentWord();
+  bool isAllLettersGuessedRight(Word currentWord) {
     final currentWordLetters = currentWord.letters;
     return currentWordLetters.every((letter) {
       return guessedLetters.contains(letter);
@@ -34,14 +31,10 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _wordLoaderService.preloadNextWord();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final currentWord = _wordLoaderService.currentWord();
+    // final currentWord = _wordLoaderService.currentWord();
+    final wordLoaderService = WordLoaderService.of(context);
+    final currentWord = wordLoaderService.currentWord();
 
     return Scaffold(
       body: PortraitScreen(
@@ -71,7 +64,7 @@ class _GameScreenState extends State<GameScreen> {
                 guessedLetters.add(pressedLetter);
               });
 
-              if (isAllLettersGuessedRight()) {
+              if (isAllLettersGuessedRight(currentWord)) {
                 GoRouter.of(context).go('/winning');
               }
             }

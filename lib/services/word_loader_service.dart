@@ -1,8 +1,23 @@
-import 'package:guess_word_game/models/word.dart';
+import 'package:flutter/widgets.dart';
+
+import '../models/word.dart';
 
 // TODO (live): Remove all stale data and consume some API service
 
-class WordLoaderService {
+class WordLoaderService extends InheritedWidget {
+  WordLoaderService({super.key, required super.child});
+
+  static WordLoaderService of(BuildContext context) {
+    final WordLoaderService? result =
+        context.dependOnInheritedWidgetOfExactType<WordLoaderService>();
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(WordLoaderService oldWidget) {
+    return oldWidget.currentWord().word != currentWord().word;
+  }
+
   final List<Word> _loadedWords = [
     const Word(
       definitions: [
@@ -28,7 +43,7 @@ class WordLoaderService {
   Word currentWord() => _loadedWords.elementAt(_currentWordIndex);
 
   void loadNextWord() {
-    if (_currentWordIndex >= (_loadedWords.length-1)) {
+    if (_currentWordIndex >= (_loadedWords.length - 1)) {
       _currentWordIndex = 0;
     } else {
       _currentWordIndex++;

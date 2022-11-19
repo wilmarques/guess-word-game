@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../services/word_loader_service.dart';
+
 import '../widgets/default_button.dart';
 
 class WinningScreen extends StatefulWidget {
@@ -12,10 +13,10 @@ class WinningScreen extends StatefulWidget {
 }
 
 class _WinningScreenState extends State<WinningScreen> {
-  final _wordLoaderService = WordLoaderService();
-
   @override
   Widget build(BuildContext context) {
+    final wordLoaderService = WordLoaderService.of(context);
+
     return Scaffold(
       body: Column(
         children: [
@@ -29,7 +30,7 @@ class _WinningScreenState extends State<WinningScreen> {
           ),
           DefaultButton(
             onPressed: () {
-              _wordLoaderService.loadNextWord();
+              wordLoaderService.loadNextWord();
               GoRouter.of(context).go('/play');
             },
             text: 'Next word',
