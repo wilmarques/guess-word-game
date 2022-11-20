@@ -7,6 +7,7 @@
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "toolArgs": [
+        "--web-hostname", "0.0.0.0",
         "--web-port", "8080",
         "--web-browser-flag", "--auto-open-devtools-for-tabs",
         "--web-browser-flag", "--start-maximized",
@@ -22,6 +23,7 @@
       "program": "lib/main.dart",
       "flutterMode": "release",
       "toolArgs": [
+        "--web-hostname", "0.0.0.0",
         "--web-port", "8080",
         "--web-browser-flag", "--auto-open-devtools-for-tabs",
         "--web-browser-flag", "--start-maximized"
@@ -33,6 +35,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "toolArgs": [
+        "--web-hostname", "0.0.0.0",
         "--web-port", "8080",
         "--web-browser-flag", "--auto-open-devtools-for-tabs",
         "--web-browser-flag", "--start-maximized"

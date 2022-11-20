@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../models/word.dart';
 import '../utils/portrait_screen.dart';
+import '../utils/responsive_screen.dart';
 
 import '../services/word_loader_service.dart';
 
@@ -32,12 +33,11 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final wordLoaderService = WordLoaderService.of(context);
     final currentWord = wordLoaderService.currentWord();
 
     return Scaffold(
-      body: PortraitScreen(
+      body: ResponsiveScreen(
         topMessageArea: const GameScreenTopBar(),
         squarishMainArea: Column(
           children: [
