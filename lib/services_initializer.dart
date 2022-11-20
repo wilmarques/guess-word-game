@@ -12,6 +12,8 @@ class ServicesInitializer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO (next): See how Theme.of(context) works
+    // They really put each service on a new line?
     return WordLoaderService(
       child: child,
     );

@@ -22,7 +22,7 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   List<String> guessedLetters = [];
 
-  // TODO (live): Extract this logic to a new service
+  // TODO (live - next): Extract this logic to a new service
   bool isAllLettersGuessedRight(Word currentWord) {
     final currentWordLetters = currentWord.letters;
     return currentWordLetters.every((letter) {
@@ -32,7 +32,7 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final currentWord = _wordLoaderService.currentWord();
+
     final wordLoaderService = WordLoaderService.of(context);
     final currentWord = wordLoaderService.currentWord();
 
