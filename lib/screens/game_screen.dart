@@ -43,9 +43,11 @@ class _GameScreenState extends State<GameScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: 50,
+                vertical: 20,
               ),
-              child: TipViewer(tips: currentWord.definitions),
+              child: TipViewer(
+                tips: currentWord.definitions,
+              ),
             ),
             Expanded(
               child: WordViewer(
