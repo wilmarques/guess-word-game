@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'screens/game_screen.dart';
-import 'screens/main_screen.dart';
-import 'screens/winning_screen.dart';
+import 'pages/game_page.dart';
+import 'pages/main_page.dart';
+import 'pages/winning_page.dart';
 
 import 'services_initializer.dart';
 
@@ -26,15 +26,15 @@ class GuessWordApp extends StatelessWidget {
     routes: <GoRoute>[
       GoRoute(
         path: '/',
-        builder: (context, state) => const MainScreen(),
+        builder: (context, state) => const MainPage(),
       ),
       GoRoute(
         path: '/play',
-        builder: (context, state) => const GameScreen(),
+        builder: (context, state) => const GamePage(),
       ),
       GoRoute(
         path: '/winning',
-        builder: (context, state) => const WinningScreen(),
+        builder: (context, state) => const WinningPage(),
       ),
     ],
   );

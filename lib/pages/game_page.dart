@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/word.dart';
-import '../utils/portrait_screen.dart';
 import '../utils/responsive_screen.dart';
 
 import '../services/word_loader_service.dart';
@@ -13,14 +12,14 @@ import '../widgets/keyboard/keyboard_letter_pressed_notification.dart';
 import '../widgets/tip_viewer.dart';
 import '../widgets/word_viewer.dart';
 
-class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
+class GamePage extends StatefulWidget {
+  const GamePage({super.key});
 
   @override
-  State<GameScreen> createState() => _GameScreenState();
+  State<GamePage> createState() => _GamePageState();
 }
 
-class _GameScreenState extends State<GameScreen> {
+class _GamePageState extends State<GamePage> {
   List<String> guessedLetters = [];
 
   // TODO (live - next): Extract this logic to a new service

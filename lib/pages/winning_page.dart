@@ -5,14 +5,14 @@ import '../services/word_loader_service.dart';
 
 import '../widgets/default_button.dart';
 
-class WinningScreen extends StatefulWidget {
-  const WinningScreen({super.key});
+class WinningPage extends StatefulWidget {
+  const WinningPage({super.key});
 
   @override
-  State<WinningScreen> createState() => _WinningScreenState();
+  State<WinningPage> createState() => _WinningPageState();
 }
 
-class _WinningScreenState extends State<WinningScreen> {
+class _WinningPageState extends State<WinningPage> {
   @override
   Widget build(BuildContext context) {
     final wordLoaderService = WordLoaderService.of(context);

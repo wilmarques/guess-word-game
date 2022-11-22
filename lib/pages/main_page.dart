@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../utils/portrait_screen.dart';
+import '../utils/responsive_screen.dart';
 import '../widgets/default_button.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PortraitScreen(
+      body: ResponsiveScreen(
         topMessageArea: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
