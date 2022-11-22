@@ -18,22 +18,28 @@ class _WinningPageState extends State<WinningPage> {
     final wordLoaderService = WordLoaderService.of(context);
 
     return Scaffold(
-      body: Column(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'You win!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 55,
-              height: 1,
-            ),
-          ),
-          DefaultButton(
-            onPressed: () {
-              wordLoaderService.loadNextWord();
-              GoRouter.of(context).go('/play');
-            },
-            text: 'Next word',
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'You win!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 55,
+                  height: 1,
+                ),
+              ),
+              DefaultButton(
+                onPressed: () {
+                  wordLoaderService.loadNextWord();
+                  GoRouter.of(context).go('/play');
+                },
+                text: 'Next word',
+              ),
+            ],
           ),
         ],
       ),
