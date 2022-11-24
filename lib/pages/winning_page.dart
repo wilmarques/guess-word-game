@@ -32,6 +32,7 @@ class _WinningPageState extends State<WinningPage> {
                   height: 1,
                 ),
               ),
+              const SizedBox(height: 50),
               DefaultButton(
                 onPressed: () {
                   wordLoaderService.loadNextWord();
