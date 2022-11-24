@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,6 +15,9 @@ class GuessWordApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ServicesInitializer(
       child: MaterialApp.router(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
         routerConfig: _router,
         title: 'Guess the Word',
         debugShowCheckedModeBanner: false,
