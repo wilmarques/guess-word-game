@@ -1,8 +1,21 @@
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 
 import '../models/word.dart';
 
-// TODO (live): Remove all stale data and consume some API service
+// TODO (next): Create integration to the Dictionary API
+// https://www.dictionaryapi.com/account/example?key=5d0404b5-8fc4-4be1-9046-9c72304eb71e
+
+// Example:
+
+// import 'package:http/http.dart' as http;
+
+// var url = Uri.https('example.com', 'whatsit/create');
+// var response = await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
+// print('Response status: ${response.statusCode}');
+// print('Response body: ${response.body}');
+
+// print(await http.read(Uri.https('example.com', 'foobar.txt')));
 
 class WordLoaderService extends InheritedWidget {
   WordLoaderService({super.key, required super.child});
@@ -43,6 +56,7 @@ class WordLoaderService extends InheritedWidget {
   Word currentWord() => _loadedWords.elementAt(_currentWordIndex);
 
   void loadNextWord() {
+    // Request a word from the Dictionary API and include the word in the _loadedWords array
     if (_currentWordIndex >= (_loadedWords.length - 1)) {
       _currentWordIndex = 0;
     } else {
