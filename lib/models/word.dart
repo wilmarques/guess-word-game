@@ -1,11 +1,13 @@
 class Word {
   const Word({
     required this.definitions,
+    // required this.shortDefinitions,
     required this.word,
     required this.imageName,
   });
 
-  final List<String> definitions;
+  final Iterable<String> definitions;
+  // final Iterable<String> shortDefinitions;
   final String word;
   final String imageName;
 

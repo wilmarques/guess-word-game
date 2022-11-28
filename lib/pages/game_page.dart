@@ -30,10 +30,17 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   wordd
+  // }
+
   @override
   Widget build(BuildContext context) {
     final wordLoaderService = WordLoaderService.of(context);
     final currentWord = wordLoaderService.currentWord();
+    wordLoaderService.preloadNextWord();
 
     return Scaffold(
       body: ResponsiveScreen(
@@ -45,7 +52,7 @@ class _GamePageState extends State<GamePage> {
                 vertical: 20,
               ),
               child: TipViewer(
-                tips: currentWord.definitions,
+                tips: currentWord.definitions.toList(),
               ),
             ),
             Expanded(

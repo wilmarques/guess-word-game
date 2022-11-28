@@ -1,24 +1,47 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/word.dart';
 
-// TODO (next): Create integration to the Dictionary API
-// https://www.dictionaryapi.com/account/example?key=5d0404b5-8fc4-4be1-9046-9c72304eb71e
+// TODO (current): Create integration to the Dictionary API
+// https://www.dictionaryapi.com/api/v3/references/sd2/json/love?key=5d0404b5-8fc4-4be1-9046-9c72304eb71e
+// TODO (next): Decode the response body
+// Docs: https://docs.flutter.dev/cookbook/networking/fetch-data
 
-// Example:
+class _WordRepository {
+  const _WordRepository();
 
-// import 'package:http/http.dart' as http;
+  Future<Word> loadWord(String word) async {
+    final url = Uri.https(
+      'www.dictionaryapi.com',
+      '/api/v3/references/sd2/json/love?key=5d0404b5-8fc4-4be1-9046-9c72304eb71e',
+    );
+    final response = await http.get(url);
+    var decodedResponse = utf8.decode(response.bodyBytes);
+    return parseResponseBody(response.body);
+    // print('Response body: ${response.body}');
+  }
 
-// var url = Uri.https('example.com', 'whatsit/create');
-// var response = await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
-// print('Response status: ${response.statusCode}');
-// print('Response body: ${response.body}');
-
-// print(await http.read(Uri.https('example.com', 'foobar.txt')));
+  Word parseResponseBody(String responseBody) {
+    return const Word(
+      definitions: [
+        'Is all we need',
+        'A strong feeling of affection and concern toward another person, as that arising from kinship or close friendship.',
+        'A strong feeling of affection and concern for another person accompanied by sexual attraction.',
+        'A feeling of devotion or adoration toward God or a god.',
+      ],
+      word: 'love',
+      imageName: 'love',
+    );
+  }
+}
 
 class WordLoaderService extends InheritedWidget {
   WordLoaderService({super.key, required super.child});
+
+  final _wordRepository = const _WordRepository();
 
   static WordLoaderService of(BuildContext context) {
     final WordLoaderService? result =
@@ -65,6 +88,7 @@ class WordLoaderService extends InheritedWidget {
   }
 
   void preloadNextWord() {
+    _wordRepository.loadWord('love');
     // throw 'Not implemented yet';
   }
 }
