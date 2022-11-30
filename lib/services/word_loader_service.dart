@@ -5,36 +5,22 @@ import 'package:http/http.dart' as http;
 
 import '../models/word.dart';
 
-// TODO (current): Create integration to the Dictionary API
-// https://www.dictionaryapi.com/api/v3/references/sd2/json/love?key=5d0404b5-8fc4-4be1-9046-9c72304eb71e
-// TODO (next): Decode the response body
-// Docs: https://docs.flutter.dev/cookbook/networking/fetch-data
-
 class _WordRepository {
   const _WordRepository();
 
   Future<Word> loadWord(String word) async {
     final url = Uri.https(
       'www.dictionaryapi.com',
-      '/api/v3/references/sd2/json/love?key=5d0404b5-8fc4-4be1-9046-9c72304eb71e',
+      '/api/v3/references/sd2/json/love',
+      {'key': '5d0404b5-8fc4-4be1-9046-9c72304eb71e'},
     );
     final response = await http.get(url);
-    var decodedResponse = utf8.decode(response.bodyBytes);
     return parseResponseBody(response.body);
-    // print('Response body: ${response.body}');
   }
 
+  // TODO (next): Parse the response body to the Word model
   Word parseResponseBody(String responseBody) {
-    return const Word(
-      definitions: [
-        'Is all we need',
-        'A strong feeling of affection and concern toward another person, as that arising from kinship or close friendship.',
-        'A strong feeling of affection and concern for another person accompanied by sexual attraction.',
-        'A feeling of devotion or adoration toward God or a god.',
-      ],
-      word: 'love',
-      imageName: 'love',
-    );
+    return Word.fromJson(jsonDecode(responseBody));
   }
 }
 

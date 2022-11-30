@@ -14,4 +14,14 @@ class Word {
   Iterable<String> get letters {
     return word.split('').map((letter) => letter.toUpperCase());
   }
+
+  factory Word.fromJson(Iterable<Map<String, dynamic>> json) {
+    // final references = json[''];
+    // [ { "meta": { "id": "love:1" } "shortdef": ["definitions"] }, {} ]
+    return const Word(
+      definitions: ['def'],
+      word: 'love',
+      imageName: 'love',
+    );
+  }
 }
