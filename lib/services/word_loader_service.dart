@@ -14,13 +14,16 @@ class _WordRepository {
       '/api/v3/references/sd2/json/love',
       {'key': '5d0404b5-8fc4-4be1-9046-9c72304eb71e'},
     );
+
     final response = await http.get(url);
     return parseResponseBody(response.body);
   }
 
-  // TODO (next): Parse the response body to the Word model
+  // TODO (live - next): Parse the response body to the Word model
   Word parseResponseBody(String responseBody) {
-    return Word.fromJson(jsonDecode(responseBody));
+    final decodedJson = jsonDecode(responseBody);
+    final parsedWord = Word.fromJson(decodedJson);
+    return parsedWord;
   }
 }
 

@@ -15,13 +15,31 @@ class Word {
     return word.split('').map((letter) => letter.toUpperCase());
   }
 
-  factory Word.fromJson(Iterable<Map<String, dynamic>> json) {
+  factory Word.fromJson(Iterable<dynamic> json) {
+    var wordReference = json
+        .first; // The first element contains the word "meta" (https://www.dictionaryapi.com/products/json#sec-2.meta)
+    var word = _extractWordFromReference(wordReference);
+
+    // TODO (next) - Extract this logic to another method
+    // Extract definitions from the result `json`
+    Iterable<String> definitions = json.takeWhile((reference) {
+      var referenceWord = _extractWordFromReference((reference));
+      return referenceWord == word;
+    }); // .map (next)
+
     // final references = json[''];
-    // [ { "meta": { "id": "love:1" } "shortdef": ["definitions"] }, {} ]
-    return const Word(
+  // [ { "meta": { "id": "love:1" } "shortdef": ["definitions"] }, {} ]
+    return Word(
       definitions: ['def'],
-      word: 'love',
-      imageName: 'love',
+      word: word,
+      imageName: word,
     );
   }
+}
+
+String _extractWordFromReference(Map<String, dynamic> reference) {
+  final referenceMeta = reference['meta'];
+  final referenceId = referenceMeta['id'];
+  final word = referenceId.split(':').first;
+  return word;
 }

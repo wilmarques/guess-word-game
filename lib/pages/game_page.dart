@@ -22,7 +22,7 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   List<String> guessedLetters = [];
 
-  // TODO (live - next): Extract this logic to a new service
+  // TODO (live): Extract this logic to a new service
   bool isAllLettersGuessedRight(Word currentWord) {
     final currentWordLetters = currentWord.letters;
     return currentWordLetters.every((letter) {
