@@ -25,12 +25,16 @@ class Word {
     Iterable<String> definitions = json.takeWhile((reference) {
       var referenceWord = _extractWordFromReference((reference));
       return referenceWord == word;
-    }); // .map (next)
+    }).map((reference) {
+      final shortDefReference = reference['shortdef'] as Iterable<String>;
+      final references = ...shortDefReference;
+      return shortDefReference as String;
+    }).toList();
 
     // final references = json[''];
-  // [ { "meta": { "id": "love:1" } "shortdef": ["definitions"] }, {} ]
+    // [ { "meta": { "id": "love:1" } "shortdef": ["definitions"] }, {} ]
     return Word(
-      definitions: ['def'],
+      definitions: definitions,
       word: word,
       imageName: word,
     );
