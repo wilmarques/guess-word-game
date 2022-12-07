@@ -19,7 +19,6 @@ class _WordRepository {
     return parseResponseBody(response.body);
   }
 
-  // TODO (live - next): Parse the response body to the Word model
   Word parseResponseBody(String responseBody) {
     final decodedJson = jsonDecode(responseBody);
     final parsedWord = Word.fromJson(decodedJson);
@@ -27,6 +26,7 @@ class _WordRepository {
   }
 }
 
+// TODO (next): Connect this Service to the repository above (_WordRepository)
 class WordLoaderService extends InheritedWidget {
   WordLoaderService({super.key, required super.child});
 

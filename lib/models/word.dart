@@ -20,19 +20,14 @@ class Word {
         .first; // The first element contains the word "meta" (https://www.dictionaryapi.com/products/json#sec-2.meta)
     var word = _extractWordFromReference(wordReference);
 
-    // TODO (next) - Extract this logic to another method
-    // Extract definitions from the result `json`
-    Iterable<String> definitions = json.takeWhile((reference) {
-      var referenceWord = _extractWordFromReference((reference));
-      return referenceWord == word;
-    }).map((reference) {
-      final shortDefReference = reference['shortdef'] as Iterable<String>;
-      final references = ...shortDefReference;
-      return shortDefReference as String;
-    }).toList();
+    Iterable<String> definitions = json
+        .takeWhile((reference) {
+          var referenceWord = _extractWordFromReference((reference));
+          return referenceWord == word;
+        })
+        .expand((reference) => reference['shortdef'])
+        .map((def) => def as String);
 
-    // final references = json[''];
-    // [ { "meta": { "id": "love:1" } "shortdef": ["definitions"] }, {} ]
     return Word(
       definitions: definitions,
       word: word,
