@@ -25,7 +25,7 @@ class GuessWordApp extends StatelessWidget {
     );
   }
 
-  // TODO (live): Extract the routes to another file
+  // TODO: Extract the routes to another file
   final GoRouter _router = GoRouter(
     routes: <GoRoute>[
       GoRoute(

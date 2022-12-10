@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../services/word_loader_service.dart';
 import '../utils/responsive_screen.dart';
 import '../widgets/default_button.dart';
 
@@ -9,6 +10,13 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final wordLoaderService = WordLoaderService.of(context);
+    final loading = wordLoaderService.loading;
+    // TODO (next): First word must be loaded before the game initialization
+    // The 'Play' must show 'Loading' while the first word is being loaded
+    // Once loaded, the 'Play' button must navigate to 'Game Page'
+    wordLoaderService.loadNextWord();
+
     return Scaffold(
       body: ResponsiveScreen(
         topMessageArea: Column(
@@ -36,10 +44,10 @@ class MainPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             DefaultButton(
-              onPressed: () {
+              onPressed: loading ? null : () {
                 GoRouter.of(context).go('/play');
               },
-              text: 'Play',
+              text: loading ? 'Loading' : 'Play',
             ),
             const SizedBox(height: 10),
             DefaultButton(

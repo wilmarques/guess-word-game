@@ -35,7 +35,7 @@ class _WinningPageState extends State<WinningPage> {
               const SizedBox(height: 50),
               DefaultButton(
                 onPressed: () {
-                  wordLoaderService.loadNextWord();
+                  wordLoaderService.prepareNextWord();
                   GoRouter.of(context).go('/play');
                 },
                 text: 'Next word',

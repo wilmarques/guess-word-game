@@ -26,11 +26,19 @@ class _WordRepository {
   }
 }
 
-// TODO (next): Connect this Service to the repository above (_WordRepository)
+// TODO: Extract InheritedWidget logic to another class
 class WordLoaderService extends InheritedWidget {
   WordLoaderService({super.key, required super.child});
 
   final _wordRepository = const _WordRepository();
+
+  final List<Word> _loadedWords = [];
+
+  // TODO: Make this non-nullable
+  Word? _currentWord;
+  Word? get currentWord => _currentWord;
+
+  bool get loading => _currentWord == null;
 
   static WordLoaderService of(BuildContext context) {
     final WordLoaderService? result =
@@ -40,44 +48,27 @@ class WordLoaderService extends InheritedWidget {
 
   @override
   bool updateShouldNotify(WordLoaderService oldWidget) {
-    return oldWidget.currentWord().word != currentWord().word;
+    if (oldWidget.currentWord == null) return false;
+    if (currentWord == null) return true;
+    return oldWidget.currentWord!.word != currentWord!.word;
   }
 
-  final List<Word> _loadedWords = [
-    const Word(
-      definitions: [
-        'Is all we need',
-        'A strong feeling of affection and concern toward another person, as that arising from kinship or close friendship.',
-        'A strong feeling of affection and concern for another person accompanied by sexual attraction.',
-        'A feeling of devotion or adoration toward God or a god.',
-      ],
-      word: 'love',
-      imageName: 'love',
-    ),
-    const Word(
-      definitions: [
-        'Opposite of love',
-        'It is hate',
-      ],
-      word: 'hate',
-      imageName: 'hate',
-    ),
-  ];
-  var _currentWordIndex = 0;
-
-  Word currentWord() => _loadedWords.elementAt(_currentWordIndex);
-
-  void loadNextWord() {
-    // Request a word from the Dictionary API and include the word in the _loadedWords array
-    if (_currentWordIndex >= (_loadedWords.length - 1)) {
-      _currentWordIndex = 0;
-    } else {
-      _currentWordIndex++;
-    }
+  void prepareNextWord() {
+    final nextWord = _loadedWords.first;
+    _loadedWords.removeAt(0);
+    _currentWord = nextWord;
   }
 
-  void preloadNextWord() {
-    _wordRepository.loadWord('love');
-    // throw 'Not implemented yet';
+  void loadNextWord() async {
+    // TODO (next): Randomize next word based on some API
+    final nextWord = await _wordRepository.loadWord('love');
+    _loadedWords.add(nextWord);
+    _currentWord = nextWord;
+  }
+
+  void preloadNextWord() async {
+    // TODO (next): Randomize next word based on some API
+    final word = await _wordRepository.loadWord('love');
+    _loadedWords.add(word);
   }
 }

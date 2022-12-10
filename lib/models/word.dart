@@ -26,7 +26,8 @@ class Word {
           return referenceWord == word;
         })
         .expand((reference) => reference['shortdef'])
-        .map((def) => def as String);
+        .map((definition) => definition as String)
+        .map((definition) => _capitalizeFirstLetter(definition));
 
     return Word(
       definitions: definitions,
@@ -42,3 +43,6 @@ String _extractWordFromReference(Map<String, dynamic> reference) {
   final word = referenceId.split(':').first;
   return word;
 }
+
+String _capitalizeFirstLetter(String sentence) =>
+    sentence.replaceRange(0, 1, sentence[0].toUpperCase());
