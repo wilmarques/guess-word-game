@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../services/word_loader_service.dart';
-
 import '../widgets/default_button.dart';
 
 class WinningPage extends StatefulWidget {
@@ -15,8 +13,6 @@ class WinningPage extends StatefulWidget {
 class _WinningPageState extends State<WinningPage> {
   @override
   Widget build(BuildContext context) {
-    final wordLoaderService = WordLoaderService.of(context);
-
     return Scaffold(
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +31,6 @@ class _WinningPageState extends State<WinningPage> {
               const SizedBox(height: 50),
               DefaultButton(
                 onPressed: () {
-                  wordLoaderService.prepareNextWord();
                   GoRouter.of(context).go('/play');
                 },
                 text: 'Next word',

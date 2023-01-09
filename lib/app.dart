@@ -1,45 +1,23 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import 'pages/game_page.dart';
-import 'pages/main_page.dart';
-import 'pages/winning_page.dart';
-
-import 'services_initializer.dart';
+import 'app_routes.dart';
+import 'app_state.dart';
 
 class GuessWordApp extends StatelessWidget {
-  GuessWordApp({Key? key}) : super(key: key);
+  const GuessWordApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ServicesInitializer(
+    return AppStateWidget(
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
-        routerConfig: _router,
+        routerConfig: routes,
         title: 'Guess the Word',
-        debugShowCheckedModeBanner: false,
       ),
     );
   }
-
-  // TODO: Extract the routes to another file
-  final GoRouter _router = GoRouter(
-    routes: <GoRoute>[
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const MainPage(),
-      ),
-      GoRoute(
-        path: '/play',
-        builder: (context, state) => const GamePage(),
-      ),
-      GoRoute(
-        path: '/winning',
-        builder: (context, state) => const WinningPage(),
-      ),
-    ],
-  );
 }
