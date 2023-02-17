@@ -34,9 +34,18 @@ class _GamePageState extends State<GamePage> {
   }
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     super.didChangeDependencies();
-    const wordReference = 'child';
+    // TODO(next): Consume API to get a random word dinamically
+    // Loading the word from the file worked corectly
+    // But an exception was thrown because `_loadWordFuture` was not initialized
+    // Should find a way to "compose" futures
+
+    final wordsTxt = await DefaultAssetBundle.of(context)
+        .loadString('assets/words/nouns/words.txt');
+    final allWords = wordsTxt.split('\n');
+    final wordReference = allWords.first;
+
     _loadWordFuture = _wordRepository.loadWord(wordReference);
   }
 
