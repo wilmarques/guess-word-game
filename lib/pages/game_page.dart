@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/word.dart';
-import '../repositories/word_repository.dart';
+import '../services/word_service.dart';
 import '../utils/responsive_screen.dart';
 
 import '../widgets/game_screen_top_bar.dart';
@@ -19,7 +19,7 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  final _wordRepository = const WordRepository();
+  late final WordService _wordService;
 
   final List<String> _guessedLetters = [];
 
@@ -36,17 +36,11 @@ class _GamePageState extends State<GamePage> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    // TODO(next): Consume API to get a random word dinamically
-    // Loading the word from the file worked corectly
-    // But an exception was thrown because `_loadWordFuture` was not initialized
-    // Should find a way to "compose" futures
 
-    final wordsTxt = await DefaultAssetBundle.of(context)
-        .loadString('assets/words/nouns/words.txt');
-    final allWords = wordsTxt.split('\n');
-    final wordReference = allWords.first;
-
-    _loadWordFuture = _wordRepository.loadWord(wordReference);
+    _wordService = WordService(
+      assetBundle: DefaultAssetBundle.of(context),
+    );
+    _loadWordFuture = _wordService.loadNextWord();
   }
 
   @override
