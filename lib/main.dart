@@ -7,6 +7,6 @@ import 'app.dart';
 void main() => runApp(
       DevicePreview(
         enabled: !kReleaseMode,
-        builder: (context) => GuessWordApp(),
+        builder: (context) => const GuessWordApp(),
       ),
     );

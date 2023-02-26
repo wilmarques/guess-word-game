@@ -58,6 +58,7 @@ class _TipViewerState extends State<TipViewer> {
           ),
         ),
         Expanded(
+          // TODO: When the paragraph is too long, the text get truncated
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: SizedBox(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -15,12 +16,14 @@ class WordService {
   }
 
   Future<String> loadRandomWord() async {
-    // TODO(next): This methods is always returning the same word
-    // We should count how many words are loaded and get a random from 0 to the last index
-    // And use this index to get a random word
-    return assetBundle.loadString('assets/words/nouns/words.txt').then(
-        (wordsTxt) =>
-            wordsTxt.split('\n').first); // Returning always the firt word
+    final random = Random();
+
+    return assetBundle
+        .loadString('assets/words/nouns/words.txt')
+        .then((wordsTxt) => wordsTxt.split('\n'))
+        .then((words) => words.elementAt(
+              random.nextInt(words.length),
+            ));
   }
 
   Future<Word> loadWordDefinition(String wordReference) async {
