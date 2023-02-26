@@ -63,7 +63,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
 USER gitpod
 WORKDIR /home/gitpod
 
-ENV FLUTTER_VERSION=3.3.5
+ENV FLUTTER_VERSION=3.7.5
 RUN git clone https://github.com/flutter/flutter -b ${FLUTTER_VERSION}
 
 ENV PATH="$HOME/flutter/bin:$PATH"
