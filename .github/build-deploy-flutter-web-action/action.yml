@@ -1,0 +1,18 @@
+name: 'Build and deploy Flutter Web'
+description: 'Build this project using Flutter Web'
+
+inputs:
+  command:
+    description: 'Command to execute on Flutter CLI'
+    required: true
+    default: 'doctor'
+
+# outputs:
+#   time: # id of output
+#     description: 'The time we greeted you'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.command }}
