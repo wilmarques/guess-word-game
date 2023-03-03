@@ -31,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build Flutter Web
-        uses: actions/build-deploy-flutter-web-action
+        uses: ./.github/actions/build-deploy-flutter-web-action
         with:
           command: 'build web'
       - name: Setup Pages
