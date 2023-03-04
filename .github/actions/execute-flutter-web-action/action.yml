@@ -1,0 +1,6 @@
+name: 'Execute Flutter commands for Flutter Web'
+description: 'This actions will execute the args on Flutter CLI, with Flutter Web configured'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

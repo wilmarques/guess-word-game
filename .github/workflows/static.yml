@@ -1,8 +1,7 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Workflow to build and deploy a Flutter Web app to Github Pages
 name: Deploy Flutter Web to Github Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
@@ -21,7 +20,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
@@ -31,7 +29,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build Flutter Web
-        uses: ./.github/actions/build-deploy-flutter-web-action
+        uses: ./.github/actions/execute-flutter-web-action
         with:
           args: build web
       - name: Setup Pages
