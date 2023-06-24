@@ -6,7 +6,7 @@
 cd $HOME
 
 # Disable sandbox to prevent Chrome from crashing
-echo 'export QTWEBENGINE_DISABLE_SANDBOX=1' >> $HOME/.bashrc
+echo 'export QTWEBENGINE_DISABLE_SANDBOX=1' >> /etc/bash.bashrc
 
 # Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O chrome.deb
