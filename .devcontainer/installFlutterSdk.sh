@@ -1,59 +1,57 @@
 #!/usr/bin/env bash
 
-# NOT DONE YET - WIP
-
 # Install Flutter and its dependencies
 # Ready for Android, Web and Linux desktop
+# Depends on Java, Android SDK and Google Chrome pre-installed in devcontainer config
+# See other scripts in .devcontainer dir
 
-# Go to $HOME
-cd $HOME
+set -e
 
-#### Pre config environment
 # Update apt packages
-sudo apt update
+apt update
 # Install Flutter dependencies not available in the base image (Ubuntu)
-sudo apt install -y xz-utils libglu1-mesa
+apt install -y xz-utils libglu1-mesa
 # Install Flutter for Linux desktop dependencies not available in the base image (Ubuntu)
-sudo apt install -y cmake clang ninja-build libgtk-3-dev
+apt install -y cmake clang ninja-build libgtk-3-dev
+# Reinstall cmake
+apt install -y --reinstall cmake
 
-#### Install Flutter
+# Include Android Home to PATH
+export ANDROID_HOME="/usr/local/android"
+
 # Set Flutter version to 3.10.3
 export FLUTTER_VERSION="3.10.3"
-# Set ANDROID_HOME variable to $HOME/.androidsdk
-export FLUTTER_HOME=$HOME/.flutter
-# Set ANDROID_HOME variable to $HOME/.androidsdk
-export ANDROID_HOME=$HOME/.androidsdk # It will later be a env variable
+echo "export FLUTTER_VERSION=${FLUTTER_VERSION}" >> /etc/bash.bashrc
+# Set and create FLUTTER_HOME location path
+export FLUTTER_HOME=/usr/local/flutter
+echo "export FLUTTER_HOME=${FLUTTER_HOME}" >> /etc/bash.bashrc
+
 # Download Flutter for Linux
 wget "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$FLUTTER_VERSION-stable.tar.xz" -O flutter.tar.xz
-# Extract flutter.tar.xz
-tar -xf flutter.tar.xz
+# Extract flutter.tar.xz to $FLUTTER_HOME
+tar -xf flutter.tar.xz -C /usr/local
 # Remove flutter.tar.xz
 rm -rf flutter.tar.xz
-# Rename flutter dir to .flutter
-mv flutter $FLUTTER_HOME
-# Include a comment in bashrc to explain Flutter SDK
-echo '# Flutter SDK' >> $HOME/.bashrc
-# Add Flutter Home to bashrc
-echo 'export FLUTTER_HOME="$HOME/.flutter"' >> $HOME/.bashrc
-# Add flutter bin to PATH
-echo 'export PATH="$FLUTTER_HOME/bin:$PATH"' >> $HOME/.bashrc
-# Add flutter pub cache to PATH
-echo 'export PUB_CACHE="/workspace/.pub_cache"' >> $HOME/.bashrc
 
-#### Configuring Flutter platforms
+# Add Flutter to PATH
+export PATH="$FLUTTER_HOME/bin:$PATH"
+echo -e "export PATH=${FLUTTER_HOME}/bin:\$PATH" >> /etc/bash.bashrc
+# Add Flutter pub cache to PATH
+export PUB_CACHE="$FLUTTER_HOME/.pub_cache"
+echo -e "export PUB_CACHE=${PUB_CACHE}" >> /etc/bash.bashrc
+# Add Flutter Home to git safe directories
+git config --global --add safe.directory $FLUTTER_HOME
+
 # Enable Flutter Web
-$FLUTTER_HOME/bin/flutter config --enable-web
+flutter config --enable-web
 # Enable Flutter Linux desktop
-$FLUTTER_HOME/bin/flutter config --enable-linux-desktop
+flutter config --enable-linux-desktop
 # Config Android SDK for Flutter
-$FLUTTER_HOME/bin/flutter config --android-sdk $ANDROID_HOME
+flutter config --android-sdk $ANDROID_HOME
 # Accept Flutter and Android licenses
-yes | $FLUTTER_HOME/bin/flutter doctor --android-licenses
+yes | flutter doctor --android-licenses
 # Precache Flutter tools
-$FLUTTER_HOME/bin/flutter precache
+flutter precache
 
 # Check if Flutter is working
-$FLUTTER_HOME/bin/flutter doctor
-
-# Return to previous dir
-cd -
+flutter doctor

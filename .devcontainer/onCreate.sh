@@ -15,7 +15,7 @@ cd .devcontainer
 ./installGoogleChrome.sh
 
 # Install Flutter SDK
-# ./installFlutterSdk.sh
+./installFlutterSdk.sh
 
 # Return to previous dir
 cd -

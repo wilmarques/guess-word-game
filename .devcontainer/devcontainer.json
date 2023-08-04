@@ -30,7 +30,10 @@
         "EditorConfig.EditorConfig",
         "redhat.java",
         "vscjava.vscode-java-debug"
-      ]
+      ],
+      "settings": {
+        "dart.flutterSdkPath": "/usr/local/flutter"
+      }
     }
   },
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
