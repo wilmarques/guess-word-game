@@ -19,8 +19,8 @@ apt install -y --reinstall cmake
 # Include Android Home to PATH
 export ANDROID_HOME="/usr/local/android"
 
-# Set Flutter version to 3.10.3
-export FLUTTER_VERSION="3.10.3"
+# Set Flutter version (stable)
+export FLUTTER_VERSION="3.22.2"
 echo "export FLUTTER_VERSION=${FLUTTER_VERSION}" >> /etc/bash.bashrc
 # Set and create FLUTTER_HOME location path
 export FLUTTER_HOME=/usr/local/flutter

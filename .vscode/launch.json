@@ -7,10 +7,14 @@
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "toolArgs": [
-        "--web-hostname", "0.0.0.0",
-        "--web-port", "8080",
-        "--web-browser-flag", "--auto-open-devtools-for-tabs",
-        "--web-browser-flag", "--start-maximized",
+        "--web-hostname",
+        "0.0.0.0",
+        "--web-port",
+        "8080",
+        "--web-browser-flag",
+        "--auto-open-devtools-for-tabs",
+        "--web-browser-flag",
+        "--start-maximized",
         // "--dds-port", "35000" // Not working currently - It's Flutter Web bug (issue #84179)
         // "--host-vmservice-port", "35000"
         // "--device-vmservice-port", "35000"
@@ -23,10 +27,14 @@
       "program": "lib/main.dart",
       "flutterMode": "release",
       "toolArgs": [
-        "--web-hostname", "0.0.0.0",
-        "--web-port", "8080",
-        "--web-browser-flag", "--auto-open-devtools-for-tabs",
-        "--web-browser-flag", "--start-maximized"
+        "--web-hostname",
+        "0.0.0.0",
+        "--web-port",
+        "8080",
+        "--web-browser-flag",
+        "--auto-open-devtools-for-tabs",
+        "--web-browser-flag",
+        "--start-maximized"
       ]
     },
     {
@@ -35,10 +43,14 @@
       "request": "launch",
       "program": "lib/main.dart",
       "toolArgs": [
-        "--web-hostname", "0.0.0.0",
-        "--web-port", "8080",
-        "--web-browser-flag", "--auto-open-devtools-for-tabs",
-        "--web-browser-flag", "--start-maximized"
+        "--web-hostname",
+        "0.0.0.0",
+        "--web-port",
+        "8080",
+        "--web-browser-flag",
+        "--auto-open-devtools-for-tabs",
+        "--web-browser-flag",
+        "--start-maximized"
       ]
     }
   ]

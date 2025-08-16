@@ -5,20 +5,39 @@
     "ghcr.io/devcontainers/features/desktop-lite:1": {},
     "ghcr.io/devcontainers/features/java:1": {
       "version": "11",
-      "installGrade": "true"
+      "installGradle": true
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
-    6080 // noVNC web client
+    6080, // noVNC web client
+    8080 // Flutter web server
   ],
+  "portsAttributes": {
+    "6080": {
+      "label": "desktop"
+    },
+    "8080": {
+      "label": "flutter-web",
+      "onAutoForward": "openPreview"
+    }
+  },
   // Arguments for Codespaces image creation
   "runArgs": [
     "--shm-size=1g" // Increase Docker's memory limit to 1GB - So Chrome won't crash
   ],
+  "containerEnv": {
+    "FLUTTER_HOME": "/usr/local/flutter",
+    "PUB_CACHE": "/usr/local/flutter/.pub_cache",
+    "ANDROID_HOME": "/usr/local/android",
+    "CHROME_EXECUTABLE": "/usr/bin/google-chrome-stable",
+    "QTWEBENGINE_DISABLE_SANDBOX": "1",
+    "PATH": "/usr/local/flutter/bin:/usr/local/android/platform-tools:/usr/local/android/cmdline-tools/latest/bin:/usr/local/android/emulator:${containerEnv:PATH}"
+  },
   // Use 'postCreateCommand' to run commands after the container is created.
   "onCreateCommand": ".devcontainer/onCreate.sh",
+  "postCreateCommand": "bash -lc 'flutter --version && flutter pub get'",
   // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.

@@ -1,0 +1,32 @@
+{
+  // VS Code tasks helpful in Codespaces per GitHub Docs
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flutter: pub get",
+      "type": "shell",
+      "command": "flutter pub get",
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: run (web)",
+      "type": "shell",
+      "command": "flutter run -d web-server --web-hostname 0.0.0.0 --web-port 8080",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": ".*",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*Running with sound null safety.*|.*Launching lib/main.dart.*",
+          "endsPattern": ".*To hot reload press.*|.*The Flutter DevTools debugger and profiler is available.*"
+        }
+      }
+    }
+  ]
+}
