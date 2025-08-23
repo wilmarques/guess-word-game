@@ -2,7 +2,7 @@
   "image": "mcr.microsoft.com/devcontainers/universal:3",
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
-      "version": "11",
+      "version": "17",
       "installGradle": true
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
