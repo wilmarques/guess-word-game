@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Install Flutter SDK 3.35.0 and its dependencies
+# Install Flutter SDK 3.24.5 and its dependencies
 # Ready for Android, Web and Linux desktop development
 # Depends on Java 17, Android SDK and Google Chrome pre-installed in devcontainer config
 # See other scripts in .devcontainer dir
@@ -19,8 +19,8 @@ apt install -y --reinstall cmake
 # Include Android Home to PATH
 export ANDROID_HOME="/usr/local/android"
 
-# Set Flutter version to 3.35.0
-export FLUTTER_VERSION="3.35.0"
+# Set Flutter version to 3.24.5
+export FLUTTER_VERSION="3.24.5"
 echo "export FLUTTER_VERSION=${FLUTTER_VERSION}" >> /etc/bash.bashrc
 # Set and create FLUTTER_HOME location path
 export FLUTTER_HOME=/usr/local/flutter
