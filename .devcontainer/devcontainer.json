@@ -8,13 +8,9 @@
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "forwardPorts": [
-    6080, // noVNC web client
     8080 // Flutter web server
   ],
   "portsAttributes": {
-    "6080": {
-      "label": "desktop"
-    },
     "8080": {
       "label": "flutter-web",
       "onAutoForward": "openPreview"
