@@ -3,8 +3,8 @@
 # Install Android SDK and its dependencies
 # Depends on Java pre-installed in devcontainer config
 
-ANDROID_PLATFORM_VERSION="30"
-ANDROID_BUILD_TOOLS_VERSION="30.0.3"
+ANDROID_PLATFORM_VERSION="34"
+ANDROID_BUILD_TOOLS_VERSION="34.0.0"
 
 # Include Android Home to PATH
 export ANDROID_HOME="/usr/local/android"
@@ -29,3 +29,19 @@ mv $ANDROID_HOME/cmdline-tools/lib $COMMAND_LINE_TOOLS_PATH
 yes | sdkmanager "platform-tools" "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" "platforms;android-${ANDROID_PLATFORM_VERSION}"
 # Accept Android licenses (required for sdkmanager)
 yes | sdkmanager --licenses
+
+# Verify Android SDK installation
+echo "Verifying Android SDK API ${ANDROID_PLATFORM_VERSION} and Build Tools ${ANDROID_BUILD_TOOLS_VERSION} installation..."
+if ! sdkmanager --list | grep -q "platforms;android-${ANDROID_PLATFORM_VERSION}"; then
+    echo "ERROR: Android API ${ANDROID_PLATFORM_VERSION} installation failed" >&2
+    sdkmanager --list | grep "platforms;android" >&2
+    exit 1
+fi
+
+if ! sdkmanager --list | grep -q "build-tools;${ANDROID_BUILD_TOOLS_VERSION}"; then
+    echo "ERROR: Android Build Tools ${ANDROID_BUILD_TOOLS_VERSION} installation failed" >&2
+    sdkmanager --list | grep "build-tools" >&2
+    exit 1
+fi
+
+echo "✅ Android SDK API ${ANDROID_PLATFORM_VERSION} and Build Tools ${ANDROID_BUILD_TOOLS_VERSION} verified successfully"

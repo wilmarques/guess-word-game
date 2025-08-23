@@ -19,8 +19,8 @@ apt install -y --reinstall cmake
 # Include Android Home to PATH
 export ANDROID_HOME="/usr/local/android"
 
-# Set Flutter version to 3.10.3
-export FLUTTER_VERSION="3.10.3"
+# Set Flutter version to 3.35.0
+export FLUTTER_VERSION="3.35.0"
 echo "export FLUTTER_VERSION=${FLUTTER_VERSION}" >> /etc/bash.bashrc
 # Set and create FLUTTER_HOME location path
 export FLUTTER_HOME=/usr/local/flutter
@@ -42,6 +42,15 @@ echo -e "export PUB_CACHE=${PUB_CACHE}" >> /etc/bash.bashrc
 # Add Flutter Home to git safe directories
 git config --global --add safe.directory $FLUTTER_HOME
 
+# Verify Flutter installation and version
+echo "Verifying Flutter ${FLUTTER_VERSION} installation..."
+if ! flutter --version | grep -q "Flutter ${FLUTTER_VERSION}"; then
+    echo "ERROR: Flutter ${FLUTTER_VERSION} installation failed or version mismatch" >&2
+    flutter --version >&2
+    exit 1
+fi
+echo "✅ Flutter ${FLUTTER_VERSION} verified successfully"
+
 # Enable Flutter Web
 flutter config --enable-web
 # Enable Flutter Linux desktop
@@ -55,3 +64,11 @@ flutter precache
 
 # Check if Flutter is working
 flutter doctor
+
+# Final verification of Flutter installation
+echo "Running final Flutter verification..."
+if ! flutter doctor | grep -q "Flutter"; then
+    echo "ERROR: Flutter doctor failed to run properly" >&2
+    exit 1
+fi
+echo "✅ Flutter installation completed successfully"
