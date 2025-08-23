@@ -1,9 +1,5 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "hostRequirements": {
-    "storage": "64gb"
-  },
-  // Docker based image
+  "image": "mcr.microsoft.com/devcontainers/universal:3",
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
       "version": "11",
@@ -11,7 +7,6 @@
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
     6080, // noVNC web client
     8080 // Flutter web server
@@ -25,13 +20,9 @@
       "onAutoForward": "openPreview"
     }
   },
-  // Use 'postCreateCommand' to run commands after the container is created.
   "onCreateCommand": ".devcontainer/onCreate.sh",
-  // Configure tool-specific properties.
   "customizations": {
-    // Configure properties specific to VS Code.
     "vscode": {
-      // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
         "Dart-Code.dart-code",
         "Dart-Code.flutter",
@@ -44,6 +35,5 @@
       }
     }
   },
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   "remoteUser": "root"
 }
