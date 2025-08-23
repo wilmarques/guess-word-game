@@ -2,8 +2,9 @@
 
 # Install Flutter and its dependencies
 # Ready for Android, Web and Linux desktop
-# Depends on Java, Android SDK and Google Chrome pre-installed in devcontainer config
+# Depends on Java 17, Android SDK and Google Chrome pre-installed in devcontainer config
 # See other scripts in .devcontainer dir
+# Flutter 3.35.0 with comprehensive verification and error handling
 
 set -e
 
@@ -19,8 +20,8 @@ apt install -y --reinstall cmake
 # Include Android Home to PATH
 export ANDROID_HOME="/usr/local/android"
 
-# Set Flutter version to 3.10.3
-export FLUTTER_VERSION="3.10.3"
+# Set Flutter version to 3.35.0
+export FLUTTER_VERSION="3.35.0"
 echo "export FLUTTER_VERSION=${FLUTTER_VERSION}" >> /etc/bash.bashrc
 # Set and create FLUTTER_HOME location path
 export FLUTTER_HOME=/usr/local/flutter
@@ -55,3 +56,13 @@ flutter precache
 
 # Check if Flutter is working
 flutter doctor
+
+# Verify Flutter installation and version
+echo "Verifying Flutter installation..."
+if ! flutter --version | grep -q "$FLUTTER_VERSION"; then
+    echo "ERROR: Flutter version verification failed. Expected: $FLUTTER_VERSION"
+    flutter --version
+    exit 1
+fi
+
+echo "✅ Flutter $FLUTTER_VERSION installation verified successfully"

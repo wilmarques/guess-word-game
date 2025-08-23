@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 # Install Android SDK and its dependencies
-# Depends on Java pre-installed in devcontainer config
+# Depends on Java 17 pre-installed in devcontainer config  
+# Android API 34 with Build Tools 34.0.0 for Flutter 3.35.0 compatibility
 
-ANDROID_PLATFORM_VERSION="30"
-ANDROID_BUILD_TOOLS_VERSION="30.0.3"
+ANDROID_PLATFORM_VERSION="34"
+ANDROID_BUILD_TOOLS_VERSION="34.0.0"
 
 # Include Android Home to PATH
 export ANDROID_HOME="/usr/local/android"
@@ -29,3 +30,17 @@ mv $ANDROID_HOME/cmdline-tools/lib $COMMAND_LINE_TOOLS_PATH
 yes | sdkmanager "platform-tools" "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" "platforms;android-${ANDROID_PLATFORM_VERSION}"
 # Accept Android licenses (required for sdkmanager)
 yes | sdkmanager --licenses
+
+# Verify Android SDK installation
+echo "Verifying Android SDK installation..."
+if ! sdkmanager --list_installed | grep -q "platforms;android-${ANDROID_PLATFORM_VERSION}"; then
+    echo "ERROR: Android platform ${ANDROID_PLATFORM_VERSION} installation failed"
+    exit 1
+fi
+
+if ! sdkmanager --list_installed | grep -q "build-tools;${ANDROID_BUILD_TOOLS_VERSION}"; then
+    echo "ERROR: Android Build Tools ${ANDROID_BUILD_TOOLS_VERSION} installation failed"
+    exit 1
+fi
+
+echo "✅ Android SDK API ${ANDROID_PLATFORM_VERSION} and Build Tools ${ANDROID_BUILD_TOOLS_VERSION} installation verified successfully"
