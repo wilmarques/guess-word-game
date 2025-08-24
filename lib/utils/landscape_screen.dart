@@ -2,13 +2,13 @@ import 'package:flutter/widgets.dart';
 
 class LandscapeScreen extends StatelessWidget {
   const LandscapeScreen({
-    Key? key,
+    super.key,
     required this.padding,
     required this.squarishMainArea,
     required this.topMessageArea,
     required this.rectangularMenuArea,
     required this.isLarge,
-  }) : super(key: key);
+  });
 
   final EdgeInsets padding;
   final Widget squarishMainArea;

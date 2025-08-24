@@ -6,9 +6,9 @@ import 'keyboard_letter.dart';
 
 class Keyboard extends StatelessWidget {
   const Keyboard({
-    Key? key,
+    super.key,
     required this.pressedLetters,
-  }) : super(key: key);
+  });
 
   final double rowSpacing = 0;
   final double columnSpacing = 0;

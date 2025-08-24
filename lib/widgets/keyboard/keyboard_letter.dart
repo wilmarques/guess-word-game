@@ -4,10 +4,10 @@ import 'keyboard_letter_pressed_notification.dart';
 
 class KeyboardLetter extends StatelessWidget {
   const KeyboardLetter({
-    Key? key,
+    super.key,
     required this.letter,
     required this.letterWasPressed,
-  }) : super(key: key);
+  });
 
   final String letter;
   final bool letterWasPressed;

@@ -8,7 +8,7 @@ import 'package:shelf_router/shelf_router.dart' as shelf_router;
 Future<void> main() async {
   final port = int.parse(Platform.environment['PORT'] ?? '8090');
 
-  final cascade = Cascade().add(_router);
+  final cascade = Cascade().add(_router.call);
 
   // See https://pub.dev/documentation/shelf/latest/shelf_io/serve.html
   final server = await shelf_io.serve(

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class PortraitScreen extends StatelessWidget {
   const PortraitScreen({
-    Key? key,
+    super.key,
     required this.padding,
     required this.squarishMainArea,
     required this.topMessageArea,
     required this.rectangularMenuArea,
     required this.mainAreaProminence,
-  }) : super(key: key);
+  });
 
   final EdgeInsets padding;
   final Widget squarishMainArea;

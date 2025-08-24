@@ -49,13 +49,13 @@ class _GamePageState extends State<GamePage> {
       future: _loadWordFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
+          return const Scaffold(
             body: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       'Loading',
                       style: TextStyle(fontSize: 40),

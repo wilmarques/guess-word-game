@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'app_routes.dart';
 
 class GuessWordApp extends StatelessWidget {
-  const GuessWordApp({Key? key}) : super(key: key);
+  const GuessWordApp({super.key});
 
   @override
   Widget build(BuildContext context) {
