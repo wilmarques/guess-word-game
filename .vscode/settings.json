@@ -1,4 +1,7 @@
 {
+  "[html]": {
+    "editor.formatOnSave": false
+  },
   "[dart]": {
     "editor.formatOnSaveMode": "file",
     "editor.formatOnSave": true,
@@ -14,5 +17,6 @@
     "editor.wordBasedSuggestions": "off"
   },
   "dart.flutterHotReloadOnSave": "all",
-  "dart.flutterShowWebServerDevice": "always"
+  "dart.flutterShowWebServerDevice": "always",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

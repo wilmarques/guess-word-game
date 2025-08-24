@@ -24,7 +24,8 @@
         "Dart-Code.flutter",
         "EditorConfig.EditorConfig",
         "redhat.java",
-        "vscjava.vscode-java-debug"
+        "vscjava.vscode-java-debug",
+        "Upstash.context7-mcp"
       ],
       "settings": {
         "dart.flutterSdkPath": "/usr/local/flutter"
