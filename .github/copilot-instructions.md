@@ -109,6 +109,21 @@ Core game state lives in `GamePage._gamePageState`:
 ### Build Targets
 Supports all Flutter platforms (web, Android, iOS, macOS, Linux, Windows) with platform-specific configurations in respective directories. Primary development target is web.
 
+## Code Quality Standards
+
+### Code Review Validation
+**Critical**: All Dart and Flutter code changes must be validated against `.github/instructions/dart-n-flutter.instructions.md` during code reviews. This file contains:
+- **Effective Dart** guidelines covering style, documentation, usage, and design patterns
+- **Flutter Architecture** recommendations including MVVM, repository pattern, and separation of concerns
+- **Testing standards** for unit tests, widget tests, and fake implementations
+
+When reviewing code or implementing new features:
+1. **Always reference** the Dart and Flutter instructions for style compliance
+2. **Validate naming conventions**: `UpperCamelCase` for types, `lowerCamelCase` for variables
+3. **Check architecture patterns**: Ensure proper separation between UI and data layers
+4. **Verify documentation**: Use `///` for doc comments, follow sentence formatting
+5. **Confirm state management**: Follow unidirectional data flow principles
+
 ## Common Gotchas
 
 - Word definitions come from external API; offline mode not implemented
