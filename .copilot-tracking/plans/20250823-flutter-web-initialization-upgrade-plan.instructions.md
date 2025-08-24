@@ -30,20 +30,20 @@ Upgrade Flutter web app initialization from deprecated `_flutter.loader.loadEntr
 
 ## Implementation Checklist
 
-### [ ] Phase 1: Remove Deprecated Patterns
+### [x] Phase 1: Remove Deprecated Patterns
 
-- [ ] Task 1.1: Remove deprecated serviceWorkerVersion variable declaration
+- [x] Task 1.1: Remove deprecated serviceWorkerVersion variable declaration
   - Details: .copilot-tracking/details/20250823-flutter-web-initialization-upgrade-details.md (Lines 15-25)
 
-- [ ] Task 1.2: Remove deprecated flutter.js script tag
+- [x] Task 1.2: Remove deprecated flutter.js script tag
   - Details: .copilot-tracking/details/20250823-flutter-web-initialization-upgrade-details.md (Lines 27-37)
 
-- [ ] Task 1.3: Remove deprecated _flutter.loader.loadEntrypoint() initialization script
+- [x] Task 1.3: Remove deprecated _flutter.loader.loadEntrypoint() initialization script
   - Details: .copilot-tracking/details/20250823-flutter-web-initialization-upgrade-details.md (Lines 39-49)
 
-### [ ] Phase 2: Implement Modern Bootstrap Pattern
+### [x] Phase 2: Implement Modern Bootstrap Pattern
 
-- [ ] Task 2.1: Add modern {{flutter_bootstrap_js}} template token
+- [x] Task 2.1: Add modern {{flutter_bootstrap_js}} template token
   - Details: .copilot-tracking/details/20250823-flutter-web-initialization-upgrade-details.md (Lines 51-61)
 
 ## Dependencies

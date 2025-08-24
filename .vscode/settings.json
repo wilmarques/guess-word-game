@@ -1,4 +1,7 @@
 {
+  "[html]": {
+    "editor.formatOnSave": false
+  },
   "[dart]": {
     "editor.formatOnSaveMode": "file",
     "editor.formatOnSave": true,
