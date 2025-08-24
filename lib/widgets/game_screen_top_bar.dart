@@ -5,8 +5,8 @@ import 'default_button.dart';
 
 class GameScreenTopBar extends StatelessWidget {
   const GameScreenTopBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

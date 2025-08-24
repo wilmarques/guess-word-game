@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'default_button.dart';
-
 class TipViewer extends StatefulWidget {
   const TipViewer({super.key, required this.tips});
 
