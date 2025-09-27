@@ -26,7 +26,7 @@ If any of the required inputs are not provided or cannot be determined from the 
 - Structure for machine parsing and human reference
 - Use coded bullet points (3-4 letter codes + 3-digit numbers) for multi-item sections
 
-The ADR must be saved in the `/docs/adr/` directory using the naming convention: `NNNN-[title-slug].md`, where NNNN is the next sequential 4-digit number (e.g., `0001-database-selection.md`).
+The ADR must be saved in the `/docs/adrs/` directory using the naming convention: `NNNN-[title-slug].md`, where NNNN is the next sequential 4-digit number (e.g., `0001-database-selection.md`).
 
 ## Required Documentation Structure
 
