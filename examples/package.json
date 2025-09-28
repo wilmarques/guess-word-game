@@ -1,0 +1,63 @@
+{
+  "name": "guess-word-game-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Flutter word guessing game with AI-generated definitions",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "flutter build web --release",
+    "build:flutter": "flutter build web --release --base-href=/",
+    "build:functions": "tsc --noEmit",
+    "test": "jest",
+    "test:flutter": "flutter test",
+    "test:functions": "jest api/",
+    "lint": "eslint api/**/*.ts --fix",
+    "lint:flutter": "flutter analyze",
+    "type-check": "tsc --noEmit",
+    "clean": "flutter clean && npm run clean:functions",
+    "clean:functions": "rm -rf .vercel"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.66",
+    "@ai-sdk/anthropic": "^0.0.50",
+    "@ai-sdk/google": "^0.0.52",
+    "ai": "^3.4.32",
+    "zod": "^3.22.4",
+    "@vercel/node": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "vercel": "^37.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": ["**/api/**/*.test.ts"],
+    "collectCoverageFrom": [
+      "api/**/*.ts",
+      "!api/**/*.test.ts"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "root": true,
+    "rules": {
+      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/no-explicit-any": "warn"
+    }
+  }
+}
