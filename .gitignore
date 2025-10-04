@@ -42,3 +42,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Dependency directories
+**/android/.gradle/
+node_modules/
