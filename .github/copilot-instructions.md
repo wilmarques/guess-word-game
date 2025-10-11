@@ -117,6 +117,8 @@ Supports all Flutter platforms (web, Android, iOS, macOS, Linux, Windows) with p
 - **Flutter Architecture** recommendations including MVVM, repository pattern, and separation of concerns
 - **Testing standards** for unit tests, widget tests, and fake implementations
 
+**Critical**: Never validates content of folders `./specify`, since this are generated files by "Specify" package through GitHub Copilot.
+
 When reviewing code or implementing new features:
 1. **Always reference** the Dart and Flutter instructions for style compliance
 2. **Validate naming conventions**: `UpperCamelCase` for types, `lowerCamelCase` for variables
