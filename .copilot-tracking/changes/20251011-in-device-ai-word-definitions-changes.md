@@ -22,12 +22,16 @@ Implementing on-device MediaPipe-based AI inference for word definitions to elim
 - lib/models/definition_request_record.dart - Data class capturing definition requests with inference tier, latency, and error tracking
 - lib/widgets/unsupported_device_dialog.dart - Blocking dialog widget with responsive layout for unsupported devices
 - lib/services/analytics_service.dart - Analytics helper capturing DefinitionRequestRecord events with local queue and flush capability
+- lib/services/mediapipe_word_service.dart - MediaPipe LLM inference service (stub implementation ready for actual MediaPipe SDK integration)
+- lib/services/on_device_word_service.dart - Word service factory that enforces no-cloud policy and blocks unsupported devices
 
 ### Modified
 
 - pubspec.yaml - Added dependencies: mediapipe_text, path_provider, shared_preferences, crypto, and integration_test
 - lib/services/model_download_manager.dart - Implemented SHA-256 checksum verification for downloaded models
 - lib/main.dart - Updated app initialization to initialize capability service, download manager, and analytics service
+- lib/pages/main_page.dart - Added capability check hook at navigation entry with UnsupportedDeviceDialog trigger and analytics logging
+- lib/pages/game_page.dart - Updated to use OnDeviceWordService with offline mode guard ensuring no network calls and analytics event recording
 
 ### Removed
 
