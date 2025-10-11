@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/word.dart';
-import '../services/word_service.dart';
+import '../main.dart' show deviceCapabilityService, modelDownloadManager, analyticsService;
+import '../services/on_device_word_service.dart';
 import '../utils/responsive_screen.dart';
 
 import '../widgets/game_screen_top_bar.dart';
@@ -19,13 +20,12 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  late final WordService _wordService;
+  late final OnDeviceWordService _wordService;
 
   final List<String> _guessedLetters = [];
 
   late final Future<Word> _loadWordFuture;
 
-  // TODO: Extract this logic to a new service
   bool isAllLettersGuessedRight(Word currentWord) {
     final currentWordLetters = currentWord.letters;
     return currentWordLetters.every((letter) {
@@ -34,13 +34,41 @@ class _GamePageState extends State<GamePage> {
   }
 
   @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
 
-    _wordService = WordService(
-      assetBundle: DefaultAssetBundle.of(context),
+    // Create word service factory
+    final factory = WordServiceFactory(
+      capabilityService: deviceCapabilityService,
+      downloadManager: modelDownloadManager,
+      analyticsService: analyticsService,
     );
-    _loadWordFuture = _wordService.loadNextWord();
+
+    // Initialize word service and load first word
+    _loadWordFuture = _initializeAndLoadWord(factory);
+  }
+
+  Future<Word> _initializeAndLoadWord(WordServiceFactory factory) async {
+    try {
+      // Create service (will throw if device unsupported)
+      _wordService = await factory.createWordService();
+
+      // Initialize MediaPipe service
+      await _wordService.initialize();
+
+      // Load first word with on-device definition
+      return await _wordService.loadNextWord();
+    } catch (e) {
+      // This shouldn't happen as MainPage checks capability first,
+      // but handle gracefully just in case
+      rethrow;
+    }
+  }
+
+  @override
+  void dispose() {
+    _wordService.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,9 +84,16 @@ class _GamePageState extends State<GamePage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 16),
                     Text(
-                      'Loading',
-                      style: TextStyle(fontSize: 40),
+                      'Loading word...',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Using on-device AI',
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                   ],
                 ),
@@ -67,7 +102,38 @@ class _GamePageState extends State<GamePage> {
           );
         }
 
-        // TODO: Handle when API doesnt return any data or we get any error (like 404)
+        if (snapshot.hasError) {
+          return Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 48,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Error loading word',
+                    style: const TextStyle(fontSize: 24),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    snapshot.error.toString(),
+                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () => GoRouter.of(context).go('/'),
+                    child: const Text('Back to Home'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
 
         final currentWord = snapshot.data!;
 
