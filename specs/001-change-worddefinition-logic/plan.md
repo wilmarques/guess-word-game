@@ -18,7 +18,7 @@ Adopt a purely on-device MediaPipe inference flow for delivering word definition
 -->
 
 **Language/Version**: Dart 3.x with Flutter stable 3.x (verify pinned SDK during implementation)
-**Primary Dependencies**: `go_router`, `http`, `device_preview`, `mediapipe_text` (MediaPipe Tasks for Text), `dio`, `path_provider`
+**Primary Dependencies**: `go_router`, `http`, `device_preview`, `mediapipe_text` (MediaPipe Tasks for Text), `path_provider`
 **Storage**: Local file storage for cached model assets; no server-side data stores
 **Testing**: `flutter_test`, integration tests via `integration_test` with injectable capability providers and download manager fakes
 **Target Platform**: Flutter (web, mobile - mobile-first design)

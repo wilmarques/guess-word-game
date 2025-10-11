@@ -8,7 +8,7 @@
 
 ## Setup Steps
 1. **Install dependencies**
-   - Add `mediapipe_text`, `dio`, `path_provider`, and `integration_test` to `pubspec.yaml`.
+   - Add `mediapipe_text`, `http`, `path_provider`, and `integration_test` to `pubspec.yaml`.
    - Run `flutter pub get`.
 2. **Configure model source**
    - Add the CDN URL and checksum to app configuration (`lib/services/model_config.dart`).
@@ -17,7 +17,7 @@
    - Create `DeviceCapabilityService` that inspects GPU/NPU/WebAssembly support and storage/battery thresholds.
    - Provide a fake implementation under `test/` for automated verification.
 4. **Set up automatic download**
-   - Implement `ModelDownloadManager` using `dio` streamed responses and save files to `path_provider`'s application support directory.
+   - Implement `ModelDownloadManager` using `http.Client.send` streamed responses and save files to `path_provider`'s application support directory.
    - Persist metadata (version, checksum, timestamp) via `shared_preferences` or lightweight JSON file.
 5. **Wire MediaPipe inference**
    - Initialize `LlmInference` during app startup after confirming assets are installed.

@@ -20,8 +20,8 @@
 
 ## Automatic model download management
 
-- **Decision**: Use Flutter's `path_provider` for storing model assets, `dio` (or `http` with streamed responses) for resumable downloads, and exponential backoff retry logic with battery/storage guards.
-- **Rationale**: `path_provider` is standard for cross-platform persistent storage. Streaming downloads enable progress reporting and pause/resume when connectivity changes. Backoff reduces battery drain and handles flaky connections while respecting the no-cloud inference rule.
+- **Decision**: Use Flutter's `path_provider` for storing model assets, coupled with the `http` package's streamed requests (`Client.send`) for resumable downloads, and exponential backoff retry logic with battery/storage guards.
+- **Rationale**: `path_provider` is standard for cross-platform persistent storage. Streaming downloads via `http` enable progress reporting and pause/resume when connectivity changes without adding an extra dependency. Backoff reduces battery drain and handles flaky connections while respecting the no-cloud inference rule.
 - **Alternatives considered**:
   - **Platform-specific download managers**: Adds channel complexity and inconsistent UX across platforms.
   - **Naïve single-shot download**: Fails gracefully on interruptions and large file sizes, risking corrupted models.
