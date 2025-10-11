@@ -22,44 +22,44 @@
 
 ### User Story 1 - Player receives instant offline definition (Priority: P1)
 
-A returning player opens the game in airplane mode and requests a new word definition. The app detects their device supports the bundled on-device model and delivers a definition without any network access.
+A returning player opens the game in airplane mode and requests a new word definition. The app verifies their device supports the bundled on-device model, ensures the required assets are already present, and delivers a definition without any network access.
 
-**Why this priority**: Enabling offline play with fast responses resolves the core business goal of reducing cloud costs while improving user experience.
+**Why this priority**: Enabling offline play with fast responses fulfills the core business goal of removing cloud dependence while improving user experience.
 
 **Independent Test**: Place the device offline, trigger a definition request, and confirm the player receives a definition from the local model within the target response time.
 
 **Acceptance Scenarios**:
 
-1. **Given** the player is offline on a supported device, **When** they request the next word definition, **Then** a locally generated definition displays within the promised response time.
-2. **Given** the local model cannot complete inference, **When** the failure occurs, **Then** the player sees an actionable message guiding them to retry or reconnect without crashing the session.
+1. **Given** the player is offline on a supported device with the local model available, **When** they request the next word definition, **Then** a locally generated definition displays within the promised response time.
+2. **Given** inference succeeds locally, **When** the definition is returned, **Then** no network calls are initiated and gameplay continues seamlessly.
 
 ---
 
-### User Story 2 - Player seamlessly falls back to cloud (Priority: P2)
+### User Story 2 - Player is informed of unsupported device (Priority: P2)
 
-A new player launches the game on a device that lacks the required acceleration. The game evaluates capabilities, downloads no large assets, and routes the definition request to the existing cloud service without disrupting gameplay.
+A new player launches the game on a device that lacks the required acceleration. The app evaluates capabilities, alerts the player that the device cannot run the on-device model, and halts gameplay before any definition requests are processed.
 
-**Why this priority**: Preserves universal compatibility while the rollout of on-device models expands.
+**Why this priority**: Prevents inconsistent experiences and guarantees no unintended cloud usage on unsupported hardware.
 
-**Independent Test**: Simulate an unsupported device profile, trigger a definition request, and confirm the cloud service responds while the player remains unaware of the fallback.
+**Independent Test**: Simulate an unsupported device profile, attempt to start a game session, and confirm the experience displays a blocking alert explaining the limitation and stops further interaction.
 
 **Acceptance Scenarios**:
 
-1. **Given** the device does not meet on-device model requirements, **When** the player requests a definition, **Then** the system routes the request to the cloud service and presents the definition without noticeable delay.
+1. **Given** the device does not meet on-device model requirements, **When** the player attempts to start the game, **Then** the system displays a clear alert and exits the word definition flow without invoking any remote services.
 
 ---
 
-### User Story 3 - Player opts into model download (Priority: P3)
+### User Story 3 - Model downloads automatically on capable device (Priority: P3)
 
-A curious player on a partially supported device receives a prompt explaining the benefits of downloading the local model. They grant consent, the model downloads in the background over Wi-Fi, and future definitions run locally.
+A first-time player opens the game on a capable device that does not yet have the local model assets. The game automatically queues and downloads the model in the background while communicating progress, and once complete, delivers definitions locally without requiring any user consent prompt.
 
-**Why this priority**: Drives adoption of the cost-saving tier while respecting player preferences and connectivity constraints.
+**Why this priority**: Guarantees consistent adoption of the on-device inference flow without relying on manual player actions.
 
-**Independent Test**: Trigger the eligibility prompt, approve the download on a stable connection, and verify subsequent definition requests use the local model with the expected performance gains.
+**Independent Test**: Start the game on a supported device without model assets, verify the download begins automatically, observe progress feedback, and confirm that the first definition request waits for completion and then runs locally.
 
 **Acceptance Scenarios**:
 
-1. **Given** the player is on a device capable of running the local model but lacking the assets, **When** they accept the download prompt, **Then** the model downloads with progress feedback and future definitions use the on-device path.
+1. **Given** the device supports the local model but lacks the assets, **When** the player launches the game, **Then** the system begins downloading the model automatically, provides status visibility, and delays gameplay until the assets are ready so that subsequent definitions run locally.
 
 ---
 
@@ -67,11 +67,11 @@ A curious player on a partially supported device receives a prompt explaining th
 
 ### Edge Cases
 
-- What happens when the device lacks sufficient storage or battery to complete the model download?
-- How does the system handle inference timeouts or partial responses from the on-device model?
-- What occurs when the player switches between online and offline states mid-session?
-- How is a definition request handled if the model assets become corrupted or outdated?
-- What feedback is shown when parental controls or enterprise policies block large downloads?
+- What happens when the device lacks sufficient storage or battery to complete the automatic model download?
+- How does the system handle inference timeouts or partial responses from the on-device model while ensuring no cloud fallback occurs?
+- What occurs when the player switches between online and offline states while an automatic download is in progress?
+- How is a definition request handled if the automatically downloaded model assets become corrupted or outdated?
+- What feedback is shown when parental controls or enterprise policies block automatic downloads?
 
 ## Requirements *(mandatory)*
 
@@ -84,11 +84,11 @@ A curious player on a partially supported device receives a prompt explaining th
 
 - **FR-001**: The experience MUST detect the player’s device capabilities at runtime to determine local model eligibility without requiring manual configuration.
 - **FR-002**: The experience MUST deliver word definitions entirely offline on eligible devices once the player has the required local assets.
-- **FR-003**: The experience MUST provide a transparent fallback to the existing cloud definition service whenever local inference is unsupported or unsuccessful.
-- **FR-004**: Players MUST be able to review, accept, or decline large model downloads, with clear messaging about storage, connectivity, and estimated download size.
-- **FR-005**: The experience MUST surface timely, human-readable error messages and retry guidance when local inference or downloads fail.
-- **FR-006**: The system MUST record analytics distinguishing local versus cloud definition usage to inform rollout and cost savings.
-- **FR-007**: The experience MUST respect player privacy by ensuring all offline inference data remains on-device and no definition prompts are transmitted when offline processing succeeds.
+- **FR-003**: The experience MUST block gameplay and display an informative alert whenever the device does not meet on-device model requirements, and it MUST NOT invoke any cloud-based definition services.
+- **FR-004**: The system MUST initiate and manage the model download automatically on eligible devices, presenting progress feedback without requiring user consent prompts, and defer gameplay until assets are ready or an error is resolved.
+- **FR-005**: The experience MUST surface timely, human-readable error messages and retry guidance when local inference or automatic downloads fail.
+- **FR-006**: The system MUST record analytics distinguishing successful local inference, blocked unsupported devices, and download failures to inform rollout decisions.
+- **FR-007**: The experience MUST respect player privacy by ensuring all inference prompts and responses remain on-device at all times.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -106,12 +106,12 @@ A curious player on a partially supported device receives a prompt explaining th
 ### Measurable Outcomes
 
 - **SC-001**: 80% of definition requests on eligible devices complete in under 1.5 seconds without network access during A/B testing.
-- **SC-002**: At least 60% of total weekly definition traffic shifts to on-device inference within 90 days of rollout for supported markets.
+- **SC-002**: 100% of definition requests initiated on supported devices execute locally with zero cloud calls after rollout stabilization.
 - **SC-003**: Player satisfaction scores for definition responsiveness improve by 15 percentage points in post-session surveys.
-- **SC-004**: Cloud inference costs decrease by 50% or more compared to the pre-launch baseline over the first full month after rollout.
+- **SC-004**: Cloud inference costs decrease by 90% or more compared to the pre-launch baseline over the first full month after rollout due to removal of cloud traffic.
 
 ### Assumptions
 
 - Eligible devices include those meeting the performance characteristics outlined in ADR 0002 (GPU/NPU or WebAssembly support).
-- Existing cloud services remain available as a fallback with unchanged SLAs during rollout.
-- Players consent to analytics tracking that differentiates local versus cloud inference without capturing personal definitions.
+- No cloud definition path is available; unsupported devices will be blocked until future updates provide alternative content.
+- Players consent to lightweight analytics tracking that differentiates successful inference versus blocked states without capturing definition content.

@@ -31,4 +31,4 @@
 
 ## Notes
 
-- All checks complete; ready for planning.
+- Revalidated after scope update removing cloud fallback; all checks complete and ready for planning.
