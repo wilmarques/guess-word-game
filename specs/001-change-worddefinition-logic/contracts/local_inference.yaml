@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Local MediaPipe Inference Service
+  version: 0.1.0
+  description: >-
+    Offline inference API exposed through an internal Flutter service wrapper. Invocations
+    are executed entirely on-device using MediaPipe Tasks.
+servers:
+  - url: mediapipe://localhost
+    description: Local MediaPipe runtime (no network traffic)
+paths:
+  /v1/inference/definitions:
+    post:
+      summary: Generate a word definition locally
+      operationId: generateDefinition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - word
+              properties:
+                word:
+                  type: string
+                  description: Word to define
+                maxTokens:
+                  type: integer
+                  minimum: 64
+                  maximum: 512
+                  default: 128
+                temperature:
+                  type: number
+                  minimum: 0.0
+                  maximum: 1.0
+                  default: 0.7
+      responses:
+        '200':
+          description: Successful local inference
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - word
+                  - definition
+                  - latencyMs
+                properties:
+                  word:
+                    type: string
+                  definition:
+                    type: string
+                    description: Natural language definition inferred locally
+                  latencyMs:
+                    type: integer
+                    description: Time taken to run inference on-device
+        '423':
+          description: Device missing required model assets or unsupported
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                  - reason
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - blocked
+                  reason:
+                    type: string
+                    description: Human-readable explanation for player alert
+        '500':
+          description: Local inference failed due to runtime error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                  - errorCode
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - failed
+                  errorCode:
+                    type: string
+                  message:
+                    type: string
+  /v1/inference/status:
+    get:
+      summary: Retrieve current model installation status
+      operationId: getStatus
+      responses:
+        '200':
+          description: Status information
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - installState
+                  - downloadProgress
+                  - supported
+                properties:
+                  installState:
+                    type: string
+                    enum:
+                      - missing
+                      - installing
+                      - installed
+                      - corrupted
+                  downloadProgress:
+                    type: number
+                    minimum: 0
+                    maximum: 1
+                  supported:
+                    type: boolean
+                  lastError:
+                    type: string
+                    nullable: true
