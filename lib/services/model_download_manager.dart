@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,8 +60,21 @@ class ModelDownloadManager {
         return false;
       }
 
-      // TODO: Implement checksum verification
-      return true;
+      // Verify checksum
+      return await _verifyChecksum(modelFile);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Verifies the SHA-256 checksum of the model file.
+  Future<bool> _verifyChecksum(File modelFile) async {
+    try {
+      final bytes = await modelFile.readAsBytes();
+      final digest = sha256.convert(bytes);
+      final checksumHex = digest.toString();
+
+      return checksumHex == ModelConfig.modelChecksumSha256;
     } catch (e) {
       return false;
     }
@@ -102,7 +117,12 @@ class ModelDownloadManager {
         throw Exception('Downloaded file size mismatch: expected $contentLength, got $fileSize');
       }
 
-      // TODO: Verify checksum
+      // Verify checksum
+      final isValid = await _verifyChecksum(modelFile);
+      if (!isValid) {
+        await modelFile.delete(); // Remove corrupted file
+        throw Exception('Model checksum verification failed');
+      }
 
       // Save metadata
       await _saveModelMetadata();

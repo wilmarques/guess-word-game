@@ -45,6 +45,7 @@ dependencies:
   mediapipe_text: ^0.1.0  # MediaPipe Tasks for Text (LLM inference)
   path_provider: ^2.1.4   # Local file storage paths
   shared_preferences: ^2.3.2  # Persistent storage for model metadata
+  crypto: ^3.0.5  # SHA-256 checksum verification
 
 dev_dependencies:
   flutter_test:

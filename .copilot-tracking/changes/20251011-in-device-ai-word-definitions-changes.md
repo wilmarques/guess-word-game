@@ -17,10 +17,17 @@ Implementing on-device MediaPipe-based AI inference for word definitions to elim
 - test/fakes/fake_device_capability_service.dart - Fake capability service implementation for testing with overridable hardware flags
 - lib/services/model_download_manager.dart - Download manager skeleton with http.Client dependency injection for streaming model downloads
 - lib/utils/analytics_events.dart - Analytics event enums covering local-success, local-blocked, download-failed, and related events
+- lib/models/player_device_profile.dart - Data class describing hardware capabilities, storage, and connectivity state
+- lib/models/local_model_package.dart - Data class representing downloadable model assets with versioning and checksum verification
+- lib/models/definition_request_record.dart - Data class capturing definition requests with inference tier, latency, and error tracking
+- lib/widgets/unsupported_device_dialog.dart - Blocking dialog widget with responsive layout for unsupported devices
+- lib/services/analytics_service.dart - Analytics helper capturing DefinitionRequestRecord events with local queue and flush capability
 
 ### Modified
 
-- pubspec.yaml - Added dependencies: mediapipe_text, path_provider, shared_preferences, and integration_test
+- pubspec.yaml - Added dependencies: mediapipe_text, path_provider, shared_preferences, crypto, and integration_test
+- lib/services/model_download_manager.dart - Implemented SHA-256 checksum verification for downloaded models
+- lib/main.dart - Updated app initialization to initialize capability service, download manager, and analytics service
 
 ### Removed
 
