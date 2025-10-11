@@ -40,9 +40,16 @@ dependencies:
   go_router: ^14.2.7
   device_preview: ^1.2.0
   http: ^1.2.2
+  
+  # On-device AI dependencies
+  mediapipe_text: ^0.1.0  # MediaPipe Tasks for Text (LLM inference)
+  path_provider: ^2.1.4   # Local file storage paths
+  shared_preferences: ^2.3.2  # Persistent storage for model metadata
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to

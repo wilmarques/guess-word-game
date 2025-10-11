@@ -46,3 +46,4 @@ app.*.map.json
 # Dependency directories
 **/android/.gradle/
 node_modules/
+flutter.tar.xz
