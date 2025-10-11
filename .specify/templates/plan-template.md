@@ -21,10 +21,10 @@
 **Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]
 **Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
 **Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]
-**Target Platform**: Flutter (web, mobile, desktop)
+**Target Platform**: Flutter (web, mobile - mobile-first design)
 **Project Type**: Flutter game application
-**Performance Goals**: 60 FPS gameplay, responsive UI
-**Constraints**: Cross-platform compatibility, 80% test coverage minimum
+**Performance Goals**: 60 FPS gameplay, mobile-optimized UI
+**Constraints**: Mobile-first design consistency, 80% test coverage minimum
 **Scale/Scope**: Single-player word game with external API integration
 
 ## Constitution Check
@@ -32,8 +32,8 @@
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
 - [ ] **Flutter Architecture**: Clear separation between presentation, business logic, and data layers
-- [ ] **Responsive Design**: Supports multiple screen sizes and orientations using ResponsiveScreen pattern
-- [ ] **Testing Strategy**: Plan includes widget tests, unit tests, and integration tests (80% coverage minimum)
+- [ ] **Mobile-First Design**: Consistent mobile UI patterns across web and mobile platforms
+- [ ] **Testing Strategy**: Plan includes flow-based integration tests, widget tests, minimal unit tests (80% coverage minimum)
 - [ ] **Performance Requirements**: Maintains 60 FPS, implements proper loading states, optimizes widget rebuilds
 - [ ] **Dart Compliance**: Follows naming conventions, documentation standards, and style guidelines
 - [ ] **Quality Gates**: All tests pass, flutter analyze shows zero issues, API error handling implemented
